@@ -25,25 +25,36 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel='import' href="sprites.svg">
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
         <title>HackNC</title>
     </head>
     <body>
-    		<div>
+        <!-- --------------- Header ------------------ -->
+        <div class="navbar-fixed">
 					<nav>
-						<div class="nav-wrapper grey lighten-3">
+						<div class="nav-wrapper blue-grey lighten-1">
 							<a class="brand-logo center grey-text text-darken-4">HackNC</a>
+<!--            <ul id="nav-mobile" class="left">
+                <li>
+                   <img src="img/speech-bubble86.svg" onclick="setView('notifications');"></img>
+                </li>
+              </ul> -->
 							<a id="menu-button" href="#" class="button-collapse">
 								<i class="material-icons grey-text text-darken-4">menu</i>
 							</a>
 						</div>
 						<ul id="menu">
-							<li><a class="white-text" href="#!">Notifications</a></li>
-							<li><a class="white-text" href="#!">Schedule</a></li>
-							<li><a class="white-text" href="#!">Maps</a></li>
+							<li><a class="white-text" href="#!" onclick="setView('info');">Frequently Asked Questions</a></li>
+							<li><a class="white-text" href="#!" onclick="setView('sponsors');">Sponsors</a></li>
+              <li><a class="white-text" href="#!">IRC Feed</a></li>              
+              <li><a class="white-text" href="#!">Social Media</a></li>
 						</ul>
 					</nav>
 				</div>
-        <main class="container">
+        <main class="container main-content">
           <div id="notifications">
           	<div class="card">
           		<div class="card-content black-text">
@@ -72,7 +83,7 @@
 								3 hrs
 							</span>
           	</div>
-          	<div class="card">
+           	<div class="card">
           		<div class="card-content black-text">
           			<span class="card-title black-text">Meow?</span>
           			<p>Come get some meow, uhhh, stuff.</p>
@@ -107,16 +118,146 @@
 							<span class="card-age">
 								50 centuries
 							</span>
-          	</div>
+          	</div> 
           </div>
+          <!-- -------------- Schedule ------------------- -->
           <div id="schedule">
+              <div id="tables">
+                <div id="innertables" class="card">
+                  <div class="card-content black-text">
+                  <span class="card-title black-text">Schedule of Events</span>
+                  <table id="fritable">
+                    <thead>
+                      <tr>
+                        <th>Friday</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                  <br>
+                  <table id="sattable">
+                    <thead>
+                      <tr>
+                        <th>Saturday</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                  <br>
+                  <table id="sntable">
+                    <thead>
+                      <tr>
+                        <th>Sunday</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
+          </div>
+          <!-- ---------------- Sponsors ----------------- -->
+          <div id="sponsors">
+          </div>
+          <!-- ---------------- Mentors ----------------- -->
+          <div id="mentors">
+            <div class="card">
+              <div class="card-content black-text">
+                <span class="card-title black-text">Request a Mentor!</span>
+                <p>Give us some info about your project and we will connect you with a mentor :)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ---------------- Map ----------------- -->
           <div id="map">
           </div>
-        </main-->
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+          <!-- ---------------- Info ----------------- -->
+          <div id="info">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header"><i class="material-icons">live_help</i>Help Desk</div>
+                <div class="collapsible-body"><p>The Help Desk is located in Sitterson Lobby top floor.  If you need help with wifi, want to check out hardware, or have general questions, please visit the help desk!</p></div>
+              </li>
+              <li>
+                <div class="collapsible-header"><i class="material-icons">question_answer</i>IRC Channel</div>
+                <div class="collapsible-body"><p>HackNC has an IRC Channel!<br><br>Join #HackNC on irc.freenode.com to chat with fellow hackers.</p></div>
+              </li>
+              <li>
+                <div class="collapsible-header"><i class="material-icons">business</i>Sponsors</div>
+                <div class="collapsible-body"><p>HackNC is proudly sponsored by:
+                  <br>Capital One
+                  <br>Lenovo
+                  <br>SQL Sentry
+                  <br>IBM
+                  <br>Other people</p></div>
+              </li>
+              <li>
+                <div class="collapsible-header"><i class="material-icons">perm_identity</i>Mentor Profiles</div>
+                <div class="collapsible-body"><p>The following mentors are here to help you!
+                  <br>
+                  <br>Jimbo Slice
+                  <br>Twitter @lolrofl
+                  <br>
+                  <br>Kimmy Lu
+                  <br>Twitter @kimmylol</p></div>
+              </li>
+            </ul>
+          </div>
+
+
+
+          <!-- -------------- Footer ------------------- -->
+        </main>
+        <footer class="app-footer page-footer blue-grey lighten-1">
+          <div class="container">
+            <div class="row">
+             <div class="col s3" onclick="setView('info');">
+              <div class="valign"><center>
+                <svg class="svg footer-icon info" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
+                  <use xlink:href="sprites.svg#map"></use>
+                </svg>
+                    <br>Info
+              </div>
+            </div>
+             <div class="col s3" onclick="setView('mentors');">
+              <div class="valign"><center>
+                <svg class="svg footer-icon mentors" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
+                  <use xlink:href="sprites.svg#mentors"></use>
+                </svg>
+                    <br>Mentors
+              </div>
+             </div>
+             <div class="col s3" onclick="setView('notifications');">
+              <div class="valign"><center>
+                <svg class="svg footer-icon notifications" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
+                  <use xlink:href="sprites.svg#speech2"></use>
+                </svg>
+                    <br><span class="notifications">Updates</span>
+              </div>
+             </div>
+             <div class="col s3" onclick="setView('schedule');">
+              <div class="valign"><center>
+                <svg class="svg footer-icon schedule" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
+                  <use xlink:href="sprites.svg#cal"></use>
+                </svg>
+                    <br>Schedule
+              </div>
+             </div>
+            </div>
+          </div>
+
+        </footer>
         <script type="text/javascript">
             app.initialize();
         </script>

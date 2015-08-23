@@ -71,6 +71,27 @@ header {
 header > span {
 	font-size: 1.8em;
 }
+body {
+    background-color: #eceff1;
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+#schedule tr, td {
+    height: 25px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.app-footer {
+    height: 70px; 
+    position: fixed;
+    bottom: 0px;
+    width:100%;
+}
 
 #menu-button {
 	position: absolute;
@@ -80,7 +101,7 @@ header > span {
 
 #menu {
 	clear: both;
-	position: relative;
+	position: relative ;
 	z-index: 99;
 	background-color: #454545;
 	display: none;
@@ -88,6 +109,15 @@ header > span {
 
 #menu > li {
 	float: none;
+}
+
+.main-content {
+    padding-top: 8px;
+    padding-bottom: 80px;
+}
+.home-button {
+    margin-left: 15px;
+    height: 40px;
 }
 
 .card-age {
@@ -99,3 +129,18 @@ header > span {
 .card-age::after {
 	content: " ago";
 }
+
+.fixed {
+    position: fixed;
+    z-index: 99;
+}
+.footer-icon {
+    position: relative;
+    top:-8px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: -16px;
+}
+/*.svg:hover path {
+    fill: red;
+}*/

@@ -19,8 +19,14 @@
 var app = {
     initialize: function() {
         this.bind();
+        //Let's hold some data on the current user
+        loadUser();
+        //Some things Brandon Does on initial load.
+        scheduleLoad();
+        setView('notifications');
+
         $("#menu-button").on("click", function() {
-					$("#menu").slideToggle(400);
+					$("#menu").slideToggle(200);
         });
     },
     bind: function() {
@@ -32,3 +38,55 @@ var app = {
         app.report('deviceready');
     },
 };
+
+function setView(name) {
+
+    var activecolor = "#AAAAAA"
+
+    views = ['notifications', 'schedule', 'mentors', "info", "menu", "sponsors"];
+    console.log("view set " + name);
+
+    $("#" + name ).show();
+    $("." + name ).eq(0).css("fill" , activecolor);
+    hideOthers(views, name);
+}
+
+function hideOthers(views, name){
+    var passivecolor = "#212121"
+
+    delete views[views.indexOf(name)];
+    for (i = 0; i< views.length; i++){
+        $("#" + views[i]).hide();
+        $("." + views[i]).each( function () {
+            $(this).css("fill" , passivecolor);
+            $(this).css("color", passivecolor);
+        });
+    }
+}
+function loadUser() {
+    //let's see if this is a new user or an old one.
+}
+
+function scheduleLoad(){
+    //alert("Load");
+    //get JSON
+    var url = "https://gist.githubusercontent.com/suBDavis/536179a2f8673842355a/raw/gistfile1.txt"
+    $.getJSON(url , function(data) {
+        console.log(data);
+        for (var i =0 ; i<data.events.length ; i++){
+            thisEvent = data.events[i];
+            console.log(thisEvent);
+            if (data.events[i].day.toLowerCase() == "friday"){
+                //console.log("friday");
+                var fritable = $("#fritable tr:last");
+                fritable.after("<tr><td>" + thisEvent.starttime + " - " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
+            } else if (thisEvent.day.toLowerCase() == "saturday"){
+                var sattable = $("#sattable tr:last");
+                sattable.after("<tr><td>" + thisEvent.starttime + "</td><td>" + thisEvent.title + "</td></tr>");
+            } else {
+                var sntable = $("#sattable tr:last");
+                sntable.after("<tr><td>" + thisEvent.starttime + "</td><td>" + thisEvent.title + "</td></tr>");
+            }
+        }
+    });
+}
