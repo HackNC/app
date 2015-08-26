@@ -78,6 +78,10 @@ body {
     margin:0;
 }
 
+.header {
+	background-color: #463E47;
+}
+
 #schedule tr, td {
     height: 25px !important;
     padding-top: 0px !important;
