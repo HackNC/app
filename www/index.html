@@ -22,10 +22,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel='import' href="sprites.svg">
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -220,9 +220,9 @@
 
           <!-- -------------- Footer ------------------- -->
         </main>
-        <footer class="app-footer page-footer blue-grey lighten-5">
-          <div class="container">
-            <div class="row">
+        <footer class="app-footer page-footer transparent">
+          <div class="container" style="width: 100%;">
+            <div class="row" id="tab-row">
              <ul class="tabs">
              	<li class="tab col s3"><a class="active" onclick="setView('notifications')" href="#notifications"><i class="fa fa-comment"></i></a></li>
              	<li class="tab col s3"><a onclick="setView('info')" href="#info"><i class="fa fa-info-circle"></i></a></li>
