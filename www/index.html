@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
         <link rel='import' href="sprites.svg">
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -186,15 +187,15 @@
           <div id="info">
             <ul class="collapsible" data-collapsible="accordion">
               <li>
-                <div class="collapsible-header"><i class="material-icons">live_help</i>Help Desk</div>
+                <div class="collapsible-header"><i class="fa fa-question-circle"></i>Help Desk</div>
                 <div class="collapsible-body"><p>The Help Desk is located in Sitterson Lobby top floor.  If you need help with wifi, want to check out hardware, or have general questions, please visit the help desk!</p></div>
               </li>
               <li>
-                <div class="collapsible-header"><i class="material-icons">question_answer</i>IRC Channel</div>
+                <div class="collapsible-header"><i class="fa fa-comments"></i>IRC Channel</div>
                 <div class="collapsible-body"><p>HackNC has an IRC Channel!<br><br>Join #HackNC on irc.freenode.com to chat with fellow hackers.</p></div>
               </li>
               <li>
-                <div class="collapsible-header"><i class="material-icons">business</i>Sponsors</div>
+                <div class="collapsible-header"><i class="fa fa-briefcase"></i>Sponsors</div>
                 <div class="collapsible-body"><p>HackNC is proudly sponsored by:
                   <br>Capital One
                   <br>Lenovo
@@ -203,7 +204,7 @@
                   <br>Other people</p></div>
               </li>
               <li>
-                <div class="collapsible-header"><i class="material-icons">perm_identity</i>Mentor Profiles</div>
+                <div class="collapsible-header"><i class="fa fa-user"></i>Mentor Profiles</div>
                 <div class="collapsible-body"><p>The following mentors are here to help you!
                   <br>
                   <br>Jimbo Slice
@@ -222,11 +223,11 @@
         <footer class="app-footer page-footer blue-grey lighten-5">
           <div class="container">
             <div class="row">
-             <ul class="tabs" style="overflow-x: hidden">
-             	<li class="tab col s3"><a href="#info">Info</a></li>
-             	<li class="tab col s3"><a href="#mentors">Mentors</a></li>
-             	<li class="tab col s3"><a href="#notification">Notifts</a></li>
-             	<li class="tab col s3"><a href="#schedule">Timeline</a></li>
+             <ul class="tabs">
+             	<li class="tab col s3"><a class="active" onclick="setView('notifications')" href="#notifications"><i class="fa fa-comment"></i></a></li>
+             	<li class="tab col s3"><a onclick="setView('info')" href="#info"><i class="fa fa-info-circle"></i></a></li>
+             	<li class="tab col s3"><a onclick="setView('mentors')" href="#mentors"><i class="fa fa-users"></i></a></li>
+             	<li class="tab col s3"><a onclick="setView('schedule')" href="#schedule"><i class="fa fa-calendar"></i></a></li>
              </ul>
              <!--div class="col s3" onclick="setView('info');">
               <div class="valign"><center>
