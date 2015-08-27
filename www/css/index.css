@@ -159,11 +159,14 @@ body {
 	color: #fff;
 }
 
-.indicator /* style the default indicator */ {
-	background-color: #2EC9DD !important;
-	bottom: auto !important;
-	height: 3px !important;
+.active-tab {
+	border-top: 3px solid #2ec9dd;
 }
+
+.active-tab > a {
+	margin-top: -3px;
+}
+
 /*.svg:hover path {
     fill: red;
 }*/

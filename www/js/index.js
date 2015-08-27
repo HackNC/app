@@ -39,8 +39,27 @@ var app = {
     },
 };
 
-function setView(name) {
+// handles primary view switches
+(function() {
+	var activeTab = $("a[href='#notifications']").parent();
+	$("#tab-row li.tab > a").each(function(idx, elm) {
+		$(elm).on("click", function(event) {
+			$(activeTab).removeClass("active-tab");
+			$(elm).parent().addClass("active-tab");
+			activeTab = $(elm).parent();
+			setView(elm.hash.substr(1));
+		});
+	});
 
+	$("#menu a").each(function(idx, elm) {
+		$(elm).on("click", function(event) {
+			$(activeTab).removeClass("active-tab");
+			setView(elm.hash.substr(1));
+		});
+	});
+})();
+
+function setView(name) {
     var activecolor = "#AAAAAA"
 
     views = ['notifications', 'schedule', 'mentors', "info", "menu", "sponsors"];
@@ -52,7 +71,7 @@ function setView(name) {
 }
 
 function hideOthers(views, name){
-    var passivecolor = "#212121"
+    var passivecolor = "#212121";
 
     delete views[views.indexOf(name)];
     for (i = 0; i< views.length; i++){

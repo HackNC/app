@@ -28,8 +28,6 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel='import' href="sprites.svg">
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
         <title>HackNC</title>
     </head>
     <body>
@@ -48,8 +46,9 @@
 							</a>
 						</div>
 						<ul id="menu">
-              <li><a class="white-text" href="#!">IRC Feed</a></li>              
-              <li><a class="white-text" href="#!">Social Media</a></li>
+              <li><a class="white-text" href="#info">Info</a></li>              
+              <li><a class="white-text" href="#irc">IRC Feed</a></li>              
+              <li><a class="white-text" href="#social">Social Media</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -222,47 +221,16 @@
           <div class="container" style="width: 100%;">
             <div class="row" id="tab-row">
              <ul class="tabs">
-             	<li class="tab col s3"><a class="active" onclick="setView('notifications')" href="#notifications"><i class="fa fa-bell"></i></a></li>
-             	<li class="tab col s3"><a onclick="setView('info')" href="#info"><i class="fa fa-info-circle"></i></a></li>
-             	<li class="tab col s3"><a onclick="setView('mentors')" href="#mentors"><i class="fa fa-users"></i></a></li>
-             	<li class="tab col s3"><a onclick="setView('schedule')" href="#schedule"><i class="fa fa-calendar"></i></a></li>
+             	<li class="tab col s3 active-tab"><a href="#notifications"><i class="fa fa-bell"></i></a></li>
+             	<li class="tab col s3"><a href="#map"><i class="fa fa-compass"></i></a></li>
+             	<li class="tab col s3"><a href="#mentors"><i class="fa fa-users"></i></a></li>
+             	<li class="tab col s3"><a href="#schedule"><i class="fa fa-calendar"></i></a></li>
              </ul>
-             <!--div class="col s3" onclick="setView('info');">
-              <div class="valign"><center>
-                <svg class="svg footer-icon info" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
-                  <use xlink:href="sprites.svg#map"></use>
-                </svg>
-                    <br>Info
-              </div>
-            </div>
-             <div class="col s3" onclick="setView('mentors');">
-              <div class="valign"><center>
-                <svg class="svg footer-icon mentors" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
-                  <use xlink:href="sprites.svg#mentors"></use>
-                </svg>
-                    <br>Mentors
-              </div>
-             </div>
-             <div class="col s3" onclick="setView('notifications');">
-              <div class="valign"><center>
-                <svg class="svg footer-icon notifications" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
-                  <use xlink:href="sprites.svg#speech2"></use>
-                </svg>
-                    <br><span class="notifications">Updates</span>
-              </div>
-             </div>
-             <div class="col s3" onclick="setView('schedule');">
-              <div class="valign"><center>
-                <svg class="svg footer-icon schedule" viewBox="0 0 495.539 495.539" style="enable-background:new 0 0 495.539 495.539;" xml:space="preserve">
-                  <use xlink:href="sprites.svg#cal"></use>
-                </svg>
-                    <br>Schedule
-              </div>
-             </div-->
             </div>
           </div>
 
         </footer>
+        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
