@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-//Hello this is a test
 var app = {
     initialize: function() {
         this.bind();
