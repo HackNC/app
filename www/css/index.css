@@ -152,6 +152,10 @@ body {
     background-color: #EFFBF8;
 }
 
+.schedule-first {
+    width: 80px;
+}
+
 
 #tab-row {
 	border-top: 1px solid #ddd;

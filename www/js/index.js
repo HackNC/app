@@ -98,13 +98,13 @@ function scheduleLoad(){
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
                 var fritable = $("#fritable tr:last");
-                fritable.after("<tr><td>" + thisEvent.starttime + " - " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
+                fritable.after("<tr><td class='schedule-first'>" + thisEvent.starttime + "  " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
             } else if (thisEvent.day.toLowerCase() == "saturday"){
                 var sattable = $("#sattable tr:last");
-                sattable.after("<tr><td>" + thisEvent.starttime + "</td><td>" + thisEvent.title + "</td></tr>");
+                sattable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + "  " + thisEvent.endtime + "</td><td>" + thisEvent.title + "</td></tr>");
             } else {
-                var sntable = $("#sattable tr:last");
-                sntable.after("<tr><td>" + thisEvent.starttime + "</td><td>" + thisEvent.title + "</td></tr>");
+                var sntable = $("#sntable tr:last");
+                sntable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + "  " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
             }
         }
     });
