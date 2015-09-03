@@ -1,0 +1,9 @@
+{
+    "com.phonegap.plugins.PushPlugin": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phonegap-build/PushPlugin",
+            "subdir": "."
+        }
+    }
+}

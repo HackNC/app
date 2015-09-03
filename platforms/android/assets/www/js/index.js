@@ -42,9 +42,7 @@ var app = {
             "ios": {}, 
             "windows": {} 
         });
-		
         alert("it worked");
-		
         push.on('registration', function(data) {
             console.log("registration event");
             alert(data.registrationId);
