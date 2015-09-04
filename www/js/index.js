@@ -48,6 +48,8 @@ var app = {
 			$(elm).parent().addClass("active-tab");
 			activeTab = $(elm).parent();
 			setView(elm.hash.substr(1));
+			event.preventDefault();
+			event.stopPropagation();
 		});
 	});
 
