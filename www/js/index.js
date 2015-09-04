@@ -26,7 +26,8 @@ var app = {
         setView('notifications');
 
         $("#menu-button").on("click", function() {
-					$("#menu").slideToggle(200);
+            $("#menu").removeClass("transition");
+            $("#menu").toggleClass("menu-close").addClass("transition").toggleClass("menu-open");
         });
     },
     bind: function() {
@@ -64,7 +65,7 @@ var app = {
 function setView(name) {
     var activecolor = "#AAAAAA"
 
-    views = ['notifications', 'schedule', 'mentors', "info", "menu", "sponsors"];
+    views = ['notifications', 'schedule', 'mentors', "info", "sponsors"];
     console.log("view set " + name);
 
     $("#" + name ).show();
