@@ -39,7 +39,12 @@ var app = {
             "android": {
                 "senderID": "824858956988"
             },
-            "ios": {}, 
+            "ios": {
+                "badge":"true",
+                "sound":"true",
+                "alert":"true",
+                "ecb":"onNotificationAPN"
+            }, 
             "windows": {} 
         });
 		
@@ -137,6 +142,24 @@ function scheduleLoad(){
         }
     });
 	
+}
+
+function onNotificationAPN(e) {
+    if (e.alert) {
+         $("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
+         // showing an alert also requires the org.apache.cordova.dialogs plugin
+         navigator.notification.alert(e.alert);
+    }
+        
+    if (e.sound) {
+        // playing a sound also requires the org.apache.cordova.media plugin
+        var snd = new Media(e.sound);
+        snd.play();
+    }
+    
+    if (e.badge) {
+        pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+    }
 }
 
 
