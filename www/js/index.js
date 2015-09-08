@@ -89,7 +89,7 @@ function loadUser() {
 function scheduleLoad(){
     //alert("Load");
     //get JSON
-    var url = "https://gist.githubusercontent.com/suBDavis/536179a2f8673842355a/raw/gistfile1.txt"
+    var url = "http://hacknc.com/schedule/schedule.json"
     $.getJSON(url , function(data) {
         console.log(data);
         for (var i =0 ; i<data.events.length ; i++){
