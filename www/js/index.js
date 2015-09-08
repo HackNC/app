@@ -16,11 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var wsuri = "ws://lmc.redspin.net:9000";
+var intro = null;
+
 var app = {
     initialize: function() {
         this.bind();
-        //Let's hold some data on the current user
-        loadUser();
         //Some things Brandon Does on initial load.
         scheduleLoad();
         setView('notifications');
@@ -82,19 +83,15 @@ function hideOthers(views, name){
         });
     }
 }
-function loadUser() {
-    //let's see if this is a new user or an old one.
-}
-
 function scheduleLoad(){
     //alert("Load");
     //get JSON
     var url = "http://hacknc.com/schedule/schedule.json"
     $.getJSON(url , function(data) {
-        console.log(data);
+        //console.log(data);
         for (var i =0 ; i<data.events.length ; i++){
             thisEvent = data.events[i];
-            console.log(thisEvent);
+            //console.log(thisEvent);
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
                 var fritable = $("#fritable tr:last");
@@ -109,3 +106,44 @@ function scheduleLoad(){
         }
     });
 }
+function getMentor(){
+    intro = {};
+    intro.type = "help";
+    intro.uid = getUserID();
+    intro.name = $("#mreq_name").val();
+    intro.issue = $("#mreq_issue").val();
+    initWS();
+}
+
+function getUserID(){
+    // this should always return the same value for the same device client.
+    // Cookies for web.
+    // Storing to memory if
+    if (localStorage.muid){
+        //It's already set.  Leave it alone
+        return localStorage.muid;
+    } else{
+        localStorage.muid = createGuid();
+        return localStorage.muid;
+    }
+}
+function createGuid(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    }
+function initWS(){
+      ws = new WebSocket(wsuri);
+      ws.onopen = function(evt){onOpen(evt);};
+      ws.onmessage = function(evt){onMessage(evt);};
+    }
+
+function onMessage(event){
+      alert(event.data);
+    }
+
+function onOpen(event){
+      console.log(intro);
+      ws.send(JSON.stringify(intro));
+    }

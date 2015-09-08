@@ -30,6 +30,7 @@
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquery.easing.js"></script>
         <script type="text/javascript" src="js/collapsible.js"></script>
+
         <title>HackNC</title>
     </head>
     <body>
@@ -174,7 +175,27 @@
             <div class="card">
               <div class="card-content black-text">
                 <span class="card-title black-text">Request a Mentor!</span>
-                <p>Give us some info about your project and we will connect you with a mentor :)</p>
+                <p> Fill out this form, and a mentor will be with your shortly.  You can go hunting for mentors yourself, but this way will probably be quicker and make sure you reach the most qualified person for your problem</p>
+                  <div class="row" id="mreq">
+                    <form class="col s12">
+                      <div class="row">
+                        <br>
+                        <div class="input-field col s12">
+                          <p>Enter your Name</p>
+                          <input placeholder="Placeholder" id="mreq_name" type="text" class="validate">
+                          <label for="name"></label>
+                        </div>
+                        
+                        <div class="input-field col s12">
+                          <p>Describe your problem</p>
+                          <textarea id="mreq_issue"placeholder = "eg.  The internets is broken!!" class="materialize-textarea"></textarea>
+                          <label for="textarea1"></label>
+                          <br>
+                          <a class="waves-effect waves-light btn" onclick="getMentor();">Submit Mentor Request</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
               </div>
             </div>
           </div>
@@ -183,7 +204,7 @@
           <div id="map">
           </div>
           <!-- ---------------- Info ----------------- -->
-          <div id="info">
+          <div id="info" >
             <ul class="collapsible" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header"><i class="fa fa-question-circle"></i>Help Desk</div>
@@ -232,8 +253,8 @@
           </div>
 
         </footer>
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript"></script>
+        <script src="js/index.js"></script>
         <!--<script type="text/javascript" src="js/materialize.min.js"></script>-->
         <script>
             app.initialize();
