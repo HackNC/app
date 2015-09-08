@@ -26,10 +26,14 @@ var app = {
         scheduleLoad();
         setView('notifications');
 
-        $("#menu-button").on("click", function() {
-					$("#menu").slideToggle(200);
-        });
+        $("#menu-button").on("click", this.toggleMenu);
     },
+
+    toggleMenu: function() {
+        $("#menu").removeClass("transition");
+        $("#menu").addClass("transition").toggleClass("menu-close").toggleClass("menu-open");
+    },
+
     bind: function() {
         document.addEventListener('deviceready', this.deviceready, false);
     },
@@ -49,6 +53,8 @@ var app = {
 			$(elm).parent().addClass("active-tab");
 			activeTab = $(elm).parent();
 			setView(elm.hash.substr(1));
+			event.preventDefault();
+			event.stopPropagation();
 		});
 	});
 
@@ -56,6 +62,7 @@ var app = {
 		$(elm).on("click", function(event) {
 			$(activeTab).removeClass("active-tab");
 			setView(elm.hash.substr(1));
+			app.toggleMenu();
 		});
 	});
 })();
@@ -63,7 +70,7 @@ var app = {
 function setView(name) {
     var activecolor = "#AAAAAA"
 
-    views = ['notifications', 'schedule', 'mentors', "info", "menu", "sponsors"];
+    views = ['notifications', 'schedule', 'mentors', "info", "sponsors"];
     console.log("view set " + name);
 
     $("#" + name ).show();

@@ -80,6 +80,7 @@ body {
 
 .header {
 	background-color: #463E47;
+	z-index: 99;
 }
 
 #schedule tr, td {
@@ -104,10 +105,22 @@ body {
 
 #menu {
 	clear: both;
-	position: relative ;
-	z-index: 99;
+	position: absolute;
+	width: 100%;
+	z-index: 88;
 	background-color: #463E47;
-	display: none;
+}
+
+.menu-close {
+	top: -200%;
+}
+
+.menu-open {
+	top: 100%;
+}
+
+.transition {
+	transition-duration: 0.3s;
 }
 
 #menu > li {
