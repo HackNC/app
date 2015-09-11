@@ -27,6 +27,19 @@ var app = {
         setView('notifications');
 
         $("#menu-button").on("click", this.toggleMenu);
+
+        $("#map").height($(window).height());
+        $("#map").width($(window).width());
+        $("#map > div").height($(window).height());
+        $("#map > div").width($(window).width());
+        $("#map")
+        		.css("position", "absolute")
+        		.css("top", "-50px")
+        		.css("left", "0")
+        		.css("background-color", "white");
+        $("#map img").panzoom({
+        	contain: 'invert'
+        });
     },
 
     toggleMenu: function() {
@@ -55,6 +68,7 @@ var app = {
 			setView(elm.hash.substr(1));
 			event.preventDefault();
 			event.stopPropagation();
+			window.scroll(0,0);
 		});
 	});
 
@@ -70,7 +84,7 @@ var app = {
 function setView(name) {
     var activecolor = "#AAAAAA"
 
-    views = ['notifications', 'schedule', 'mentors', "info", "sponsors"];
+    views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
     console.log("view set " + name);
 
     $("#" + name ).show();

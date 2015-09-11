@@ -21,7 +21,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -30,11 +30,12 @@
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquery.easing.js"></script>
         <script type="text/javascript" src="js/collapsible.js"></script>
+        <script type="text/javascript" src="js/jquery.panzoom.min.js"></script>
 
         <title>HackNC</title>
     </head>
     <body>
-        <!-- --------------- Header ------------------ -->
+        <!-- -------------- Header ------------------ -->
         <div class="navbar-fixed">
 					<nav>
 					<ul id="menu" class="menu-close">
@@ -49,7 +50,7 @@
                    <img src="img/speech-bubble86.svg" onclick="setView('notifications');"></img>
                 </li>
               </ul> -->
-							<a id="menu-button" href="#" class="button-collapse">
+							<a id="menu-button" href="#!" class="button-collapse">
 								<i class="material-icons grey-text text-lighten-5">menu</i>
 							</a>
 						</div>
@@ -202,6 +203,9 @@
 
           <!-- ---------------- Map ----------------- -->
           <div id="map">
+          	<div>
+							<img src="img/083-sitterson_hall-gr.jpg" />
+						</div>
           </div>
           <!-- ---------------- Info ----------------- -->
           <div id="info" >
