@@ -28,18 +28,25 @@ var app = {
 
         $("#menu-button").on("click", this.toggleMenu);
 
-        $("#map").height($(window).height());
-        $("#map").width($(window).width());
-        $("#map > div").height($(window).height());
-        $("#map > div").width($(window).width());
-        $("#map")
-        		.css("position", "absolute")
-        		.css("top", "-50px")
-        		.css("left", "0")
-        		.css("background-color", "white");
-        $("#map img").panzoom({
-        	contain: 'invert'
-        });
+				// needs to be recomputed for window resize
+        $("#map").css("top", $(".navbar-fixed").height()+"px");
+        
+        this.mapScale = 1;
+
+        $("#map-controls-zoom-in").on('click', function() {
+        	var cx = $("body").scrollLeft() + $("#map").width()/2;
+        	var cy = $("body").scrollTop() + $("#map").height()/2;
+        	$("#map > div > img").css('transform-origin', cx + "px " + cy + "px");
+        	this.mapScale = Math.min(2, this.mapScale+0.4);
+        	$("#map > div > img").css('transform', "scale(" + this.mapScale + ")");
+        }.bind(this));
+        $("#map-controls-zoom-out").on('click', function() {
+        	var cx = $("body").scrollLeft() + $("#map").width()/2;
+        	var cy = $("body").scrollTop() + $("#map").height()/2;
+        	$("#map > div > img").css('transform-origin', cx + "px " + cy + "px");
+        	this.mapScale = Math.max(0.2, this.mapScale-0.4);
+        	$("#map > div > img").css('transform', "scale(" + this.mapScale + ")");
+        }.bind(this));
     },
 
     toggleMenu: function() {
