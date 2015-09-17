@@ -62,6 +62,10 @@
     <gap:splash gap:density="mdpi" gap:platform="android" src="res/screen/android/screen-mdpi-portrait.png" />
     <gap:splash gap:density="hdpi" gap:platform="android" src="res/screen/android/screen-hdpi-portrait.png" />
     <gap:splash gap:density="xhdpi" gap:platform="android" src="res/screen/android/screen-xhdpi-portrait.png" />
+    <gap:splash gap:qualifier="land-ldpi" gap:platform="android" src="res/screen/android/screen-ldpi-landscape.png" />
+    <gap:splash gap:qualifier="land-mdpi" gap:platform="android" src="res/screen/android/screen-mdpi-landscape.png" />
+    <gap:splash gap:qualifier="land-hdpi" gap:platform="android" src="res/screen/android/screen-hdpi-landscape.png" />
+    <gap:splash gap:qualifier="land-xhdpi" gap:platform="android" src="res/screen/android/screen-xhdpi-landscape.png" />
     <gap:splash gap:platform="blackberry" src="res/screen/blackberry/screen-225.png" />
     <gap:splash gap:platform="ios" height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
     <gap:splash gap:platform="ios" height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
