@@ -203,7 +203,7 @@ body {
 
 #map-controls {
 	position: fixed;
-	top: 64px;
+	top: 70px;
 	right: 15px;
 	font-size: 2em;
 	z-index: 666;
@@ -211,6 +211,7 @@ body {
 	border: 1px solid #dcc;
 	border-radius: 2px;
 	background-color: white;
+	opacity: 0.9;
 }
 
 #map-controls-zoom-in {
@@ -222,6 +223,17 @@ body {
 #map-controls-zoom-out {
 	width: 30px;
 	text-align: center;
+}
+
+#map-list {
+	position: fixed;
+	top: 70px;
+	right: 55px;
+	z-index: 666;
+}
+
+#map select {
+	display: block;
 }
 
 /*.svg:hover path {
