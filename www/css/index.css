@@ -236,6 +236,9 @@ body {
 	display: block;
 }
 
+.fa-bars {
+	font-size: 1.8em !important;
+}
 /*.svg:hover path {
     fill: red;
 }*/
