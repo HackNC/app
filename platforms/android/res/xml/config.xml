@@ -40,4 +40,5 @@
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />
+    <access origin="*" />
 </widget>

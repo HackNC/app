@@ -47,4 +47,6 @@
     <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
 
     <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />
+	
+	<access origin="*" />
 </widget>

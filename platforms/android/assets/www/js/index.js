@@ -16,6 +16,34 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ 
+ var notificationCache = [{
+	"subject" : "",
+	"body" : "No notifications yet :D"
+ }];
+ 
+ var loading = false; 
+ 
+var cardHTML = "";
+
+var loadingHTML = '<div style="position:fixed;top:50%;width:100%;text-align:center;font-size:350%;visibility:hidden;" id="e">loading</div>'
+
+var t=0;
+window.setInterval("r()",33);
+function r(){
+	if (loading) {
+		t+=2;
+		document.getElementById('e').style.webkitTransform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
+		document.getElementById('e').style.mozTransform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
+		document.getElementById('e').style.transform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
+		document.getElementById('e').style.visibility="visible";
+		rr = Math.floor((Math.sin(t/100)+1)*127);
+		g = Math.floor((Math.cos(2.32*t/100)+1)*127);
+		b = Math.floor((Math.cos(-5.79*t/100)+1)*127);	//document.getElementById('body').style.backgroundColor="rgb("+rr+","+g+","+b+")"
+		document.getElementById('e').style.color="rgb("+(255-rr)+","+(255-g)+","+(255-b)+")"
+	}
+}
+
 var app = {
     initialize: function() {
         this.bind();
@@ -23,18 +51,21 @@ var app = {
         loadUser();
         //Some things Brandon Does on initial load.
         scheduleLoad();
+		updateNotifications();
         setView('notifications');
-
+		$.get('http://159.203.73.64:9001/reg?id=' + "I AM BUTTS", function(stuff) {
+			});
         $("#menu-button").on("click", function() {
 					$("#menu").slideToggle(200);
-					alert("wow!3");
         });
     },
+	onResume: function() {
+		updateNotifications();
+	},
 
     deviceready: function() {
         // This is an event handler function, which means the scope is the event.
         // So, we must explicitly called `app.report()` instead of `this.report()`.
-		alert("readay");
 		var push = PushNotification.init({
             "android": {
                 "senderID": "824858956988"
@@ -42,25 +73,29 @@ var app = {
             "ios": {}, 
             "windows": {} 
         });
-        alert("it worked");
+		
+		
         push.on('registration', function(data) {
-            console.log("registration event");
-            alert(data.registrationId);
-
+            console.log(data.registrationId);
+			//data.registrationId
+			$.get('http://159.203.73.64:9001/reg?id=' + data.registrationId, function(stuff) {
+			});
         });
 
         push.on('notification', function(data) {
         	console.log("notification event");
-            alert(JSON.stringify(data));
+			updateNotifications();
         });
 
         push.on('error', function(e) {
-            alert("push error");
+
         });    
 	},
 	
 	bind: function() {
         document.addEventListener('deviceready', this.deviceready, true);
+		document.addEventListener("resume", this.onResume, false);
+
     },
 	
 };
@@ -90,6 +125,9 @@ function setView(name) {
 
     views = ['notifications', 'schedule', 'mentors', "info", "menu", "sponsors"];
     console.log("view set " + name);
+	if (name == "notifications") {
+		updateNotifications();
+	}
 
     $("#" + name ).show();
     $("." + name ).eq(0).css("fill" , activecolor);
@@ -117,7 +155,6 @@ function scheduleLoad(){
     //get JSON
     var url = "https://gist.githubusercontent.com/suBDavis/536179a2f8673842355a/raw/gistfile1.txt"
     $.getJSON(url , function(data) {
-        console.log(data);
         for (var i =0 ; i<data.events.length ; i++){
             thisEvent = data.events[i];
             console.log(thisEvent);
@@ -137,4 +174,16 @@ function scheduleLoad(){
 	
 }
 
+function updateNotifications() {
+	$("#notifications").html(loadingHTML);
+	loading = true;
+	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
+		 cardHTML="";
+		 loading=false;
+		 for (var i = 0; i < data.length; i++) {
+				cardHTML = "<div class=card> <div class='card-content black-text'> <p>" + data[i].body + "</p></div></div>" + cardHTML;
+				$("#notifications").html(cardHTML);
+			}
+	 });
+}
 
