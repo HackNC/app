@@ -110,6 +110,7 @@ function setView(name) {
 		if (name == "map") {
 			app.zoomer = new IScroll("#map-view", {
 				zoom: true,
+				scrollbars: true,
 				scrollX: true,
 				scrollY: true,
 				freeScroll: true,
