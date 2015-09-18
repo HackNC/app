@@ -285,3 +285,26 @@ body {
 /*.svg:hover path {
     fill: red;
 }*/
+
+#notification-loading {
+	position: absolute;
+	top: calc(50% - 28px);
+	top: -webkit-calc(50% - 28px);
+	top: -moz-calc(50% - 28px);
+	left: calc(50% - 16px);
+	left: -webkit-calc(50% - 16px);
+	left: -moz-calc(50% - 16px);
+	font-size: 300%;
+}
+
+#notification-count {
+	position: absolute;
+	top: -3px;
+	left: 60%;
+	background-color: red;
+	z-index: 1001;
+	padding: 2px;
+	font-size: 0.6em;
+	font-weight: bold;
+	border-radius: 3px;
+}

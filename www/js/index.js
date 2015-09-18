@@ -32,21 +32,13 @@ var MAP_ZOOM_DELTA = 0.4;
  
 var cardHTML = "";
 
-var loadingHTML = '<div style="position:fixed;top:50%;width:100%;text-align:center;font-size:350%;visibility:hidden;" id="e">loading</div>';
+var loadingHTML = '<div style="visibility:hidden;" id="notification-loading"><i class="fa fa-spinner fa-spin"></i></div>'
 
 var t=0;
 window.setInterval("r()",33);
 function r(){
 	if (loading) {
-		t+=2;
-		document.getElementById('e').style.webkitTransform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
-		document.getElementById('e').style.mozTransform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
-		document.getElementById('e').style.transform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
-		document.getElementById('e').style.visibility="visible";
-		rr = Math.floor((Math.sin(t/100)+1)*127);
-		g = Math.floor((Math.cos(2.32*t/100)+1)*127);
-		b = Math.floor((Math.cos(-5.79*t/100)+1)*127);	//document.getElementById('body').style.backgroundColor="rgb("+rr+","+g+","+b+")"
-		document.getElementById('e').style.color="rgb("+(255-rr)+","+(255-g)+","+(255-b)+")";
+		document.getElementById('notification-loading').style.visibility="visible";
 	}
 }
 
@@ -69,7 +61,8 @@ var app = {
 					}
 				});
 
-		$.get('http://159.203.73.64:9001/reg?id=' + "I AM BUTTS", function(stuff) {
+		var uuid = window['device'] == undefined ? 'undefined' : device.uuid;
+		$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
 			});
 
         $("#menu-button").on("click", function() {

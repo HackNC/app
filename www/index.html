@@ -57,6 +57,9 @@
 				</div>
         <main class="container main-content">
           <div id="notifications">
+          	<div id="notification-loading">
+          		<i class="fa fa-spinner fa-spin"></i>
+          	</div>
           	<div class="card">
           		<div class="card-content black-text">
           			<span class="card-title black-text">Welcome to HackNC!</span>
@@ -272,7 +275,11 @@
           <div class="container" style="width: 100%;">
             <div class="row" id="tab-row">
              <ul class="tabs">
-             	<li class="tab col s3 f-icon active-tab"><a href="#notifications"><i class="fa fa-bell"></i></a></li>
+             	<li class="tab col s3 f-icon active-tab"><a href="#notifications">
+             	<i class="fa fa-bell">
+             		<div id="notification-count">5</div>
+             	</i>
+             	</a></li>
              	<li class="tab col s3 f-icon"><a href="#map"><i class="fa fa-compass"></i></a></li>
              	<li class="tab col s3 f-icon"><a href="#mentors"><i class="fa fa-question"></i><i class="fa fa-user"></i></a></li>
              	<li class="tab col s3 f-icon"><a href="#schedule"><i class="fa fa-calendar"></i></a></li>
