@@ -132,17 +132,17 @@ body {
 }
 
 .menu-close {
-	transform: translate3d(0, -66.6666667%, 0);
-	-moz-transform: translate3d(0, -66.6666667%, 0);
-	-ms-transform: translate3d(0, -66.6666667%, 0);
-	-webkit-transform: translate3d(0, -66.6666667%, 0);
+	transform: translate3d(0, -100%, 0);
+	-moz-transform: translate3d(0, -100%, 0);
+	-ms-transform: translate3d(0, -100%, 0);
+	-webkit-transform: translate3d(0, -100%, 0);
 }
 
 .menu-open {
-	transform: translate3d(0, 33.3333333%, 0);
-	-moz-transform: translate3d(0, 33.3333333%, 0);
-	-ms-transform: translate3d(0, 33.3333333%, 0);
-	-webkit-transform: translate3d(0, 33.3333333%, 0);
+	transform: translate3d(0, 100%, 0);
+	-moz-transform: translate3d(0, 100%, 0);
+	-ms-transform: translate3d(0, 100%, 0);
+	-webkit-transform: translate3d(0, 100%, 0);
 }
 
 .transition {
