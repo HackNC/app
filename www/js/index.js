@@ -31,8 +31,6 @@ var app = {
 				// needs to be recomputed for window resize
         $("#map").css("top", $(".navbar-fixed").height()+"px");
 
-        this.mapScale = 1;
-
         $("body").on('click', function(ev) {
 					if ($("#menu").hasClass("menu-open")) {
 						app.toggleMenu(ev);
@@ -112,6 +110,19 @@ function setView(name) {
     $("#" + name ).show();
     $("." + name ).eq(0).css("fill" , activecolor);
     hideOthers(views, name);
+
+		if (name == "map") {
+			var x = new IScroll("#map", {
+				zoom: true,
+				scrollX: true,
+				scrollY: true,
+				freeScroll: true,
+				mouseWheel: true,
+				wheelAction: 'zoom',
+				zoomMin: 0.2,
+			});
+			x.zoom(0.2, undefined, undefined, 0);
+		}
 
 		// close menu when switching windows
     if ($("#menu").hasClass("menu-open")) {

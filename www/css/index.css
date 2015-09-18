@@ -222,14 +222,12 @@ body {
 
 #map {
 	position: absolute;
+	width: 100%;
+	z-index: 1;
 	left: 0;
 	right: 0;
 	bottom: 48px;
-	transform-origin: 0 0;
-	-moz-transform-origin: 0 0;
-	-ms-transform-origin: 0 0;
-	-webkit-transform-origin: 0 0;
-	overflow: auto;
+	overflow: hidden;
 }
 
 #map-controls {
