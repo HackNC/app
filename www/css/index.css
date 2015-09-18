@@ -228,6 +228,7 @@ body {
 	right: 0;
 	bottom: 48px;
 	overflow: hidden;
+	background-color: #fff;
 }
 
 #map-controls {
@@ -246,11 +247,13 @@ body {
 #map-controls-zoom-in {
 	width: 30px;
 	text-align: center;
+	z-index: 666;
 	border-bottom: 1px solid #dee;
 }
 
 #map-controls-zoom-out {
 	width: 30px;
+	z-index: 666;
 	text-align: center;
 }
 

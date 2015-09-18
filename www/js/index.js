@@ -19,6 +19,10 @@
 var wsuri = "ws://lmc.redspin.net:9000";
 var intro = null;
 
+var MAP_ZOOM_MIN = 0.2;
+var MAP_ZOOM_MAX = 4;
+var MAP_ZOOM_DELTA = 0.4;
+
 var app = {
     initialize: function() {
         this.bind();
@@ -37,24 +41,16 @@ var app = {
 					}
         });
 
-			/*
+				this.mapScale = 1;
+
         $("#map-controls-zoom-in").on('click', function() {
-        	var cx = $("#map").scrollLeft() + $("#map").width()/2;
-        	var cy = $("#map").scrollTop() + $("#map").height()/2;
-        	console.log('in', cx, cy);
-        	$("#map > img").css('transform-origin', cx + "px " + cy + "px");
-        	this.mapScale = Math.min(2, this.mapScale+0.4);
-        	$("#map > img").css('transform', "scale(" + this.mapScale + ")");
+        	this.mapScale = Math.min(this.mapScale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
+        	this.zoomer.zoom(this.mapScale);
         }.bind(this));
         $("#map-controls-zoom-out").on('click', function() {
-        	var cx = $("#map").scrollLeft() + $("#map").width()/2;
-        	var cy = $("#map").scrollTop() + $("#map").height()/2;
-        	$("#map > img").css('transform-origin', cx + "px " + cy + "px");
-        	this.mapScale = Math.max(0.2, this.mapScale-0.4);
-        	$("#map > img").css('transform', "scale(" + this.mapScale + ")");
-        	console.log('out', cx, cy);
+        	this.mapScale = Math.max(this.mapScale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
+        	this.zoomer.zoom(this.mapScale);
         }.bind(this));
-       */
     },
 
     toggleMenu: function(ev) {
@@ -112,16 +108,17 @@ function setView(name) {
     hideOthers(views, name);
 
 		if (name == "map") {
-			var x = new IScroll("#map", {
+			app.zoomer = new IScroll("#map-view", {
 				zoom: true,
 				scrollX: true,
 				scrollY: true,
 				freeScroll: true,
 				mouseWheel: true,
 				wheelAction: 'zoom',
-				zoomMin: 0.2,
+				zoomMin: MAP_ZOOM_MIN,
+				zoomMax: MAP_ZOOM_MAX,
 			});
-			x.zoom(0.2, undefined, undefined, 0);
+			app.zoomer.zoom(MAP_ZOOM_MIN, undefined, undefined, 0);
 		}
 
 		// close menu when switching windows
