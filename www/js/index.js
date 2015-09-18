@@ -32,11 +32,8 @@ var app = {
 
         $("#menu-button").on("click", this.toggleMenu);
 
-				window.onresize = function(ev) {
-					// needs to be recomputed for window resize
-					$("#map").css("top", $(".navbar-fixed").height()+"px");
-				};
-				window.onresize();
+				// needs to be recomputed for window resize
+				$("#map").css("top", $(".navbar-fixed").height()+"px");
 
         $("body").on('click', function(ev) {
 					if ($("#menu").hasClass("menu-open")) {
