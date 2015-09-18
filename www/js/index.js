@@ -32,8 +32,11 @@ var app = {
 
         $("#menu-button").on("click", this.toggleMenu);
 
-				// needs to be recomputed for window resize
-        $("#map").css("top", $(".navbar-fixed").height()+"px");
+				window.onresize = function(ev) {
+					// needs to be recomputed for window resize
+					$("#map").css("top", $(".navbar-fixed").height()+"px");
+				};
+				window.onresize();
 
         $("body").on('click', function(ev) {
 					if ($("#menu").hasClass("menu-open")) {
@@ -116,6 +119,7 @@ function setView(name) {
 				wheelAction: 'zoom',
 				zoomMin: MAP_ZOOM_MIN,
 				zoomMax: MAP_ZOOM_MAX,
+				preventDefault: false,
 			});
 			app.zoomer.zoom(MAP_ZOOM_MIN, undefined, undefined, 0);
 		}
@@ -147,7 +151,7 @@ function hideOthers(views, name){
 function scheduleLoad(){
     //alert("Load");
     //get JSON
-    var url = "http://hacknc.com/schedule/schedule.json"
+    var url = "http://hacknc.com/schedule/json/student.json"
     $.getJSON(url , function(data) {
         //console.log(data);
         for (var i =0 ; i<data.events.length ; i++){
