@@ -41,15 +41,13 @@ var app = {
 					}
         });
 
-				this.mapScale = 1;
-
         $("#map-controls-zoom-in").on('click', function() {
-        	this.mapScale = Math.min(this.mapScale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
-        	this.zoomer.zoom(this.mapScale);
+        	var s = Math.min(this.zoomer.scale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
+        	this.zoomer.zoom(s);
         }.bind(this));
         $("#map-controls-zoom-out").on('click', function() {
-        	this.mapScale = Math.max(this.mapScale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
-        	this.zoomer.zoom(this.mapScale);
+        	var s = Math.max(this.zoomer.scale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
+        	this.zoomer.zoom(s);
         }.bind(this));
     },
 
@@ -120,6 +118,12 @@ function setView(name) {
 				zoomMax: MAP_ZOOM_MAX,
 			});
 			app.zoomer.zoom(MAP_ZOOM_MIN, undefined, undefined, 0);
+		}
+		else {
+			if (app.zoomer) {
+				app.zoomer.destroy();
+				app.zoomer = null;
+			}
 		}
 
 		// close menu when switching windows
