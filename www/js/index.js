@@ -30,26 +30,40 @@ var app = {
 
 				// needs to be recomputed for window resize
         $("#map").css("top", $(".navbar-fixed").height()+"px");
-        
+
         this.mapScale = 1;
 
+        $("body").on('click', function(ev) {
+					if ($("#menu").hasClass("menu-open")) {
+						app.toggleMenu(ev);
+					}
+        });
+
+			/*
         $("#map-controls-zoom-in").on('click', function() {
-        	var cx = $("body").scrollLeft() + $("#map").width()/2;
-        	var cy = $("body").scrollTop() + $("#map").height()/2;
-        	$("#map > div > img").css('transform-origin', cx + "px " + cy + "px");
+        	var cx = $("#map").scrollLeft() + $("#map").width()/2;
+        	var cy = $("#map").scrollTop() + $("#map").height()/2;
+        	console.log('in', cx, cy);
+        	$("#map > img").css('transform-origin', cx + "px " + cy + "px");
         	this.mapScale = Math.min(2, this.mapScale+0.4);
-        	$("#map > div > img").css('transform', "scale(" + this.mapScale + ")");
+        	$("#map > img").css('transform', "scale(" + this.mapScale + ")");
         }.bind(this));
         $("#map-controls-zoom-out").on('click', function() {
-        	var cx = $("body").scrollLeft() + $("#map").width()/2;
-        	var cy = $("body").scrollTop() + $("#map").height()/2;
-        	$("#map > div > img").css('transform-origin', cx + "px " + cy + "px");
+        	var cx = $("#map").scrollLeft() + $("#map").width()/2;
+        	var cy = $("#map").scrollTop() + $("#map").height()/2;
+        	$("#map > img").css('transform-origin', cx + "px " + cy + "px");
         	this.mapScale = Math.max(0.2, this.mapScale-0.4);
-        	$("#map > div > img").css('transform', "scale(" + this.mapScale + ")");
+        	$("#map > img").css('transform', "scale(" + this.mapScale + ")");
+        	console.log('out', cx, cy);
         }.bind(this));
+       */
     },
 
-    toggleMenu: function() {
+    toggleMenu: function(ev) {
+    		if (ev) {
+					ev.preventDefault();
+					ev.stopPropagation();
+				}
         $("#menu").removeClass("transition");
         $("#menu").addClass("transition").toggleClass("menu-close").toggleClass("menu-open");
     },
@@ -81,9 +95,10 @@ var app = {
 
 	$("#menu a").each(function(idx, elm) {
 		$(elm).on("click", function(event) {
+			event.preventDefault();
+			event.stopPropagation();
 			$(activeTab).removeClass("active-tab");
 			setView(elm.hash.substr(1));
-			app.toggleMenu();
 		});
 	});
 })();
@@ -97,6 +112,11 @@ function setView(name) {
     $("#" + name ).show();
     $("." + name ).eq(0).css("fill" , activecolor);
     hideOthers(views, name);
+
+		// close menu when switching windows
+    if ($("#menu").hasClass("menu-open")) {
+    	app.toggleMenu();
+    }
 }
 
 function hideOthers(views, name){
