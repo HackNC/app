@@ -116,7 +116,6 @@ function setView(name) {
 				wheelAction: 'zoom',
 				zoomMin: MAP_ZOOM_MIN,
 				zoomMax: MAP_ZOOM_MAX,
-				preventDefault: false,
 			});
 			app.zoomer.zoom(MAP_ZOOM_MIN, undefined, undefined, 0);
 		}
