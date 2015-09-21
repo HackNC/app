@@ -299,7 +299,7 @@ body {
 
 #notification-count {
 	position: absolute;
-	top: -3px;
+	top: -5px;
 	left: 60%;
 	background-color: red;
 	z-index: 1001;
@@ -307,4 +307,37 @@ body {
 	font-size: 0.6em;
 	font-weight: bold;
 	border-radius: 3px;
+}
+
+.button-alt-text {
+	padding-top: 3px;
+	font-size: 0.5em;
+}
+
+@media (max-width: 330px) {
+	.button-alt-text {
+		font-size: 0.46em;
+	}
+}
+
+@media (max-width: 310px) {
+	.button-alt-text {
+		font-size: 0.43em;
+	}
+	a[href="#schedule"] i .button-alt-text {
+		visibility: hidden;
+		position: relative;
+	}
+	a[href="#schedule"] i .button-alt-text:after {
+		visibility: visible;
+		position: absolute;
+		top: 3px;
+		left: 4px;
+		content: "agenda";
+	}
+}
+
+.button-icon {
+	position: relative;
+	top: 9px;
 }

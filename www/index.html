@@ -57,9 +57,6 @@
 				</div>
         <main class="container main-content">
           <div id="notifications">
-          	<div id="notification-loading">
-          		<i class="fa fa-spinner fa-spin"></i>
-          	</div>
           	<div class="card">
           		<div class="card-content black-text">
           			<span class="card-title black-text">Welcome to HackNC!</span>
@@ -275,14 +272,25 @@
           <div class="container" style="width: 100%;">
             <div class="row" id="tab-row">
              <ul class="tabs">
-             	<li class="tab col s3 f-icon active-tab"><a href="#notifications">
-             	<i class="fa fa-bell">
-             		<div id="notification-count">5</div>
+             	<li class="tab col s3 f-icon active-tab">
+             	<a href="#notifications">
+             	<!-- need position relative here, otherwise the notification count div
+             	will go too far -->
+             	<i class="fa fa-bell button-icon">
+								<div id="notification-count">5</div>
+								<div class="button-alt-text">alerts</div>
              	</i>
-             	</a></li>
-             	<li class="tab col s3 f-icon"><a href="#map"><i class="fa fa-compass"></i></a></li>
-             	<li class="tab col s3 f-icon"><a href="#mentors"><i class="fa fa-question"></i><i class="fa fa-user"></i></a></li>
-             	<li class="tab col s3 f-icon"><a href="#schedule"><i class="fa fa-calendar"></i></a></li>
+             	</a>
+             	</li>
+             	<li class="tab col s3 f-icon"><a href="#map"><i class="fa fa-compass button-icon">
+								<div class="button-alt-text">maps</div>
+             	</i></a></li>
+             	<li class="tab col s3 f-icon"><a href="#mentors"><i class="fa fa-users button-icon">
+								<div class="button-alt-text">mentors</div>
+             	</i></a></li>
+             	<li class="tab col s3 f-icon"><a href="#schedule"><i class="fa fa-calendar button-icon">
+								<div class="button-alt-text">schedule</div>
+             	</i></a></li>
              </ul>
             </div>
           </div>

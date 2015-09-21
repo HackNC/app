@@ -32,15 +32,7 @@ var MAP_ZOOM_DELTA = 0.4;
  
 var cardHTML = "";
 
-var loadingHTML = '<div style="visibility:hidden;" id="notification-loading"><i class="fa fa-spinner fa-spin"></i></div>'
-
 var t=0;
-window.setInterval("r()",33);
-function r(){
-	if (loading) {
-		document.getElementById('notification-loading').style.visibility="visible";
-	}
-}
 
 var app = {
     initialize: function() {
@@ -64,10 +56,6 @@ var app = {
 		var uuid = window['device'] == undefined ? 'undefined' : device.uuid;
 		$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
 			});
-
-        $("#menu-button").on("click", function() {
-					$("#menu").slideToggle(200);
-        });
 
         $("#map-controls-zoom-in").on('click', function() {
         	var s = Math.min(this.zoomer.scale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
@@ -112,7 +100,6 @@ var app = {
 
         push.on('notification', function(data) {
         	console.log("notification event");
-        	console.log(data);
 			updateNotifications();
         });
 
@@ -231,13 +218,12 @@ function scheduleLoad(){
 }
 
 function updateNotifications() {
-	$("#notifications").html(loadingHTML);
 	loading = true;
 	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
 		 cardHTML="";
 		 loading=false;
 		 for (var i = 0; i < data.length; i++) {
-				cardHTML = "<div class=card> <div class='card-content black-text'> <p>" + data[i].body + "</p></div></div>" + cardHTML;
+				cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><p>" + data[i].body + "</p></div></div>" + cardHTML;
 				$("#notifications").html(cardHTML);
 			}
 	 });
