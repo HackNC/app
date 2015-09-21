@@ -341,3 +341,16 @@ body {
 	position: relative;
 	top: 9px;
 }
+
+#schedule {
+	position: absolute;
+	z-index: 1;
+	top: 70px;
+	left: 0;
+	right: 0;
+	bottom: 48px;
+}
+
+#calendar h2 {
+	font-size: 1em;
+}

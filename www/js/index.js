@@ -40,7 +40,7 @@ var app = {
         //Some things Brandon Does on initial load.
         scheduleLoad();
 		updateNotifications();
-        setView('notifications');
+        setView('schedule');
 
         $("#menu-button").on("click", this.toggleMenu);
 
@@ -65,7 +65,79 @@ var app = {
         	var s = Math.max(this.zoomer.scale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
         	this.zoomer.zoom(s);
         }.bind(this));
-    },
+
+				$('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next today',
+						center: '',
+						right: ''
+					},
+					defaultDate: '2015-02-12',
+					editable: false,
+					eventLimit: true, // allow "more" link when too many events
+					allDaySlot: false,
+					slotEventOverlap: true,
+					height: $("#schedule").height()-1, // By default, this option is unset and the calendar's height is calculated by aspectRatio.
+					defaultView: 'agendaDay',
+					scrollTime: '06:00:00', // default is 6am
+					events: [
+					{
+						title: 'All Day Event',
+						start: '2015-02-01'
+					},
+					{
+						title: 'Long Event',
+						start: '2015-02-07',
+						end: '2015-02-10'
+					},
+					{
+						id: 999,
+						title: 'Repeating Event',
+						start: '2015-02-09T16:00:00'
+					},
+					{
+						id: 999,
+						title: 'Repeating Event',
+						start: '2015-02-16T16:00:00'
+					},
+					{
+						title: 'Conference',
+						start: '2015-02-11',
+						end: '2015-02-13'
+					},
+					{
+						title: 'Meeting',
+						start: '2015-02-12T10:30:00',
+						end: '2015-02-12T12:30:00'
+					},
+					{
+						title: 'Lunch',
+						start: '2015-02-12T12:00:00'
+					},
+					{
+						title: 'Meeting',
+						start: '2015-02-12T14:30:00'
+					},
+					{
+						title: 'Happy Hour',
+						start: '2015-02-12T17:30:00'
+					},
+					{
+						title: 'Dinner',
+						start: '2015-02-12T20:00:00'
+					},
+					{
+						title: 'Birthday Party',
+						start: '2015-02-13T07:00:00'
+					},
+					{
+						title: 'Click for Google',
+						url: 'http://google.com/',
+						start: '2015-02-28'
+					}
+				]
+			});
+		},
 
     toggleMenu: function(ev) {
     		if (ev) {
