@@ -16,6 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var wsuri = "ws://lmc.redspin.net:9000";
+var intro = null;
+
+var MAP_ZOOM_MIN = 0.2;
+var MAP_ZOOM_MAX = 4;
+var MAP_ZOOM_DELTA = 0.4;
  
  var notificationCache = [{
 	"subject" : "",
@@ -26,39 +32,50 @@
  
 var cardHTML = "";
 
-var loadingHTML = '<div style="position:fixed;top:50%;width:100%;text-align:center;font-size:350%;visibility:hidden;" id="e">loading</div>'
-
 var t=0;
-window.setInterval("r()",33);
-function r(){
-	if (loading) {
-		t+=2;
-		document.getElementById('e').style.webkitTransform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
-		document.getElementById('e').style.mozTransform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
-		document.getElementById('e').style.transform="rotate("+t+"deg) scale(" + (Math.sin(t/29)+1.3) + ")";
-		document.getElementById('e').style.visibility="visible";
-		rr = Math.floor((Math.sin(t/100)+1)*127);
-		g = Math.floor((Math.cos(2.32*t/100)+1)*127);
-		b = Math.floor((Math.cos(-5.79*t/100)+1)*127);	//document.getElementById('body').style.backgroundColor="rgb("+rr+","+g+","+b+")"
-		document.getElementById('e').style.color="rgb("+(255-rr)+","+(255-g)+","+(255-b)+")"
-	}
-}
 
 var app = {
     initialize: function() {
         this.bind();
-        //Let's hold some data on the current user
-        loadUser();
         //Some things Brandon Does on initial load.
         scheduleLoad();
 		updateNotifications();
         setView('notifications');
-		$.get('http://159.203.73.64:9001/reg?id=' + "I AM BUTTS", function(stuff) {
+
+        $("#menu-button").on("click", this.toggleMenu);
+
+				// needs to be recomputed for window resize
+				$("#map").css("top", $(".navbar-fixed").height()+"px");
+
+        $("body").on('click', function(ev) {
+					if ($("#menu").hasClass("menu-open")) {
+						app.toggleMenu(ev);
+					}
+				});
+
+		var uuid = window['device'] == undefined ? 'undefined' : device.uuid;
+		$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
 			});
-        $("#menu-button").on("click", function() {
-					$("#menu").slideToggle(200);
-        });
+
+        $("#map-controls-zoom-in").on('click', function() {
+        	var s = Math.min(this.zoomer.scale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
+        	this.zoomer.zoom(s);
+        }.bind(this));
+        $("#map-controls-zoom-out").on('click', function() {
+        	var s = Math.max(this.zoomer.scale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
+        	this.zoomer.zoom(s);
+        }.bind(this));
     },
+
+    toggleMenu: function(ev) {
+    		if (ev) {
+					ev.preventDefault();
+					ev.stopPropagation();
+				}
+        $("#menu").removeClass("transition");
+        $("#menu").addClass("transition").toggleClass("menu-close").toggleClass("menu-open");
+    },
+
 	onResume: function() {
 		updateNotifications();
 	},
@@ -66,14 +83,13 @@ var app = {
     deviceready: function() {
         // This is an event handler function, which means the scope is the event.
         // So, we must explicitly called `app.report()` instead of `this.report()`.
-		var push = PushNotification.init({
+		window.push = PushNotification.init({
             "android": {
                 "senderID": "824858956988"
             },
             "ios": {}, 
             "windows": {} 
         });
-		
 		
         push.on('registration', function(data) {
             console.log(data.registrationId);
@@ -109,11 +125,16 @@ var app = {
 			$(elm).parent().addClass("active-tab");
 			activeTab = $(elm).parent();
 			setView(elm.hash.substr(1));
+			event.preventDefault();
+			event.stopPropagation();
+			window.scroll(0,0);
 		});
 	});
 
 	$("#menu a").each(function(idx, elm) {
 		$(elm).on("click", function(event) {
+			event.preventDefault();
+			event.stopPropagation();
 			$(activeTab).removeClass("active-tab");
 			setView(elm.hash.substr(1));
 		});
@@ -121,9 +142,9 @@ var app = {
 })();
 
 function setView(name) {
-    var activecolor = "#AAAAAA"
+    var activecolor = "#AAAAAA";
 
-    views = ['notifications', 'schedule', 'mentors', "info", "menu", "sponsors"];
+    views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
     console.log("view set " + name);
 	if (name == "notifications") {
 		updateNotifications();
@@ -132,6 +153,33 @@ function setView(name) {
     $("#" + name ).show();
     $("." + name ).eq(0).css("fill" , activecolor);
     hideOthers(views, name);
+
+		if (name == "map") {
+			var minMapScale = ($("body").width()-10)/$("#map-view > img").width();
+			app.zoomer = new IScroll("#map-view", {
+				zoom: true,
+				scrollbars: true,
+				scrollX: true,
+				scrollY: true,
+				freeScroll: true,
+				mouseWheel: true,
+				wheelAction: 'zoom',
+				zoomMin: minMapScale,
+				zoomMax: MAP_ZOOM_MAX
+			});
+			app.zoomer.zoom(minMapScale, undefined, undefined, 0);
+		}
+		else {
+			if (app.zoomer) {
+				app.zoomer.destroy();
+				app.zoomer = null;
+			}
+		}
+
+		// close menu when switching windows
+    if ($("#menu").hasClass("menu-open")) {
+    	app.toggleMenu();
+    }
 }
 
 function hideOthers(views, name){
@@ -146,18 +194,14 @@ function hideOthers(views, name){
         });
     }
 }
-function loadUser() {
-    //let's see if this is a new user or an old one.
-}
-
 function scheduleLoad(){
     //alert("Load");
     //get JSON
-    var url = "https://gist.githubusercontent.com/suBDavis/536179a2f8673842355a/raw/gistfile1.txt"
+    var url = "http://hacknc.com/schedule/json/student.json";
     $.getJSON(url , function(data) {
         for (var i =0 ; i<data.events.length ; i++){
             thisEvent = data.events[i];
-            console.log(thisEvent);
+            //console.log(thisEvent);
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
                 var fritable = $("#fritable tr:last");
@@ -175,15 +219,55 @@ function scheduleLoad(){
 }
 
 function updateNotifications() {
-	$("#notifications").html(loadingHTML);
+	return;
 	loading = true;
 	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
 		 cardHTML="";
 		 loading=false;
 		 for (var i = 0; i < data.length; i++) {
-				cardHTML = "<div class=card> <div class='card-content black-text'> <p>" + data[i].body + "</p></div></div>" + cardHTML;
+				cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><p>" + data[i].body + "</p></div></div>" + cardHTML;
 				$("#notifications").html(cardHTML);
 			}
 	 });
 }
+function getMentor(){
+    intro = {};
+    intro.type = "help";
+    intro.uid = getUserID();
+    intro.name = $("#mreq_name").val();
+    intro.issue = $("#mreq_issue").val();
+    initWS();
+}
 
+function getUserID(){
+    // this should always return the same value for the same device client.
+    // Cookies for web.
+    // Storing to memory if
+    if (localStorage.muid){
+        //It's already set.  Leave it alone
+        return localStorage.muid;
+    } else{
+        localStorage.muid = createGuid();
+        return localStorage.muid;
+    }
+}
+function createGuid(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    }
+function initWS(){
+      ws = new WebSocket(wsuri);
+      ws.onopen = function(evt){onOpen(evt);};
+      ws.onmessage = function(evt){onMessage(evt);};
+    }
+
+function onMessage(event){
+      alert(event.data);
+    }
+
+function onOpen(event){
+      console.log(intro);
+      ws.send(JSON.stringify(intro));
+    }

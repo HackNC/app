@@ -4,7 +4,7 @@
 
 ## Installation
 
-This requires phonegap/cordova CLI 5.0+ ( current stable v1.2.2 )
+This requires phonegap/cordova CLI 5.0+ ( current stable v1.3.0 )
 
 ```
 phonegap plugin add phonegap-plugin-push
@@ -37,7 +37,7 @@ cordova plugin add https://github.com/phonegap/phonegap-plugin-push
 
 ```javascript
     var push = PushNotification.init({ "android": {"senderID": "12345679"},
-         "ios": {}, "windows": {} } );
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 
     push.on('registration', function(data) {
         // data.registrationId
@@ -48,7 +48,7 @@ cordova plugin add https://github.com/phonegap/phonegap-plugin-push
         // data.title,
         // data.count,
         // data.sound,
-        // data.image, 
+        // data.image,
         // data.additionalData
     });
 
@@ -67,11 +67,14 @@ Parameter | Description
 `options.android` | `JSON Object` Android specific initialization options.
 `options.android.senderID` | `String` Maps to the project number in the Google Developer Console.
 `options.android.icon` | `String` Optional. The name of a drawable resource to use as the small-icon.
-`options.android.iconColor` | `String` Optional. Sets the background color of the small icon. [Supported Formats](http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String))
+`options.android.iconColor` | `String` Optional. Sets the background color of the small icon on Android 5.0 and greater. [Supported Formats](http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String))
 `options.android.sound` | `Boolean` Optional. If `true` it plays the sound specified in the push data or the default system sound. Default is `true`.
 `options.android.vibrate` | `Boolean` Optional. If `true` the device vibrates on receipt of notification. Default is `true`.
 `options.android.clearNotifications` | `Boolean` Optional. If `true` the app clears all pending notifications when it is closed. Default is `true`.
 `options.ios` | `JSON Object` iOS specific initialization options.
+`options.ios.alert` | `Boolean` Optional. If `true` the device shows an alert on receipt of notification. Default is `false`.
+`options.ios.badge` | `Boolean` Optional. If `true` the device sets the badge number on receipt of notification. Default is `false`.
+`options.ios.sound` | `Boolean` Optional. If `true` the device plays a sound on receipt of notification. Default is `false`.
 `options.windows` | `JSON Object` Windows specific initialization options.
 
 #### Returns
@@ -82,7 +85,7 @@ Parameter | Description
 
 ```javascript
     var push = PushNotification.init({ "android": {"senderID": "12345679"},
-         "ios": {}, "windows": {} } );
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 ```
 
 ### push.on(event, callback)
@@ -124,7 +127,7 @@ Callback Parameter | Description
 
 #### Example
 
-```javascript    
+```javascript
     push.on('notification', function(data) {
         // data.message,
         // data.title,
@@ -184,8 +187,10 @@ Including this plugin in a project that is built by PhoneGap Build is as easy as
 into your apps `config.xml` file. PhoneGap Build will pick up the latest version of phonegap-plugin-push published on npm. If you want to specify a particular version of the plugin you can add the `version` attribute to the `gap` tag.
 
 ```
-<gap:plugin name="phonegap-plugin-push" source="npm" version="1.1.1" />
+<gap:plugin name="phonegap-plugin-push" source="npm" version="1.2.3" />
 ```
+
+Note: version 1.3.0 of this plugin begins to use Gradle to install the Android Support Framework. Gradle is not yet supported on PhoneGap Build so please use version 1.2.3 when building your app on PhoneGap Build.
 
 ## Android Behaviour
 
@@ -195,7 +200,7 @@ By default the icon displayed in your push notification will be your apps icon. 
 
 ```javascript
     var push = PushNotification.init({ "android": {"senderID": "12345679"},
-         "ios": {}, "windows": {} } );
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 ```
 
 The result will look much like this:
@@ -210,13 +215,13 @@ In order to get a better user experience you can specify an alternate icon and b
 	var push = PushNotification.init({ 
 		"android": { 
 			"senderID": "123456789", "icon": "phonegap", "iconColor": "blue"}, 
-		"ios": {}, "windows": {} 
+		"ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} 
 	});
 ```
 
 Where *icon* is the name of an image in the Android *drawables* folder. Writing a hook to describe how to copy an image to the Android *drawables* folder is out of scope for this README but there is an [excellent tutorial](http://devgirl.org/2013/11/12/three-hooks-your-cordovaphonegap-project-needs/) that you can copy.
 
-*iconColor* is one of the supported formats #RRGGBB or #AARRGGBB or one of the following names: 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta', 'yellow', 'lightgray', 'darkgray', 'grey', 'lightgrey', 'darkgrey', 'aqua', 'fuchsia', 'lime', 'maroon', 'navy', 'olive', 'purple', 'silver', 'teal'. 
+*iconColor* is one of the supported formats #RRGGBB or #AARRGGBB or one of the following names: 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta', 'yellow', 'lightgray', 'darkgray', 'grey', 'lightgrey', 'darkgrey', 'aqua', 'fuchsia', 'lime', 'maroon', 'navy', 'olive', 'purple', 'silver', 'teal'. *iconColor* is supported on Android 5.0 and greater.
 
 Please follow the [Android icon design guidelines](https://www.google.com/design/spec/style/icons.html#) when creating your icon.
 
@@ -228,8 +233,8 @@ The first is the *drawables* folder in your app. This JSON sent from GCM:
 
 ```javascript
 {
-	title:"Large Icon", 
-	message: "Loaded from drawables folder", 
+	title:"Large Icon",
+	message: "Loaded from drawables folder",
 	image: "twitter"
 }
 ```
@@ -242,8 +247,8 @@ The second is the *assets* folder in your app. This JSON sent from GCM:
 
 ```javascript
 {
-	title:"Large Icon", 
-	message: "Loaded from assets folder", 
+	title:"Large Icon",
+	message: "Loaded from assets folder",
 	image: "www/image/logo.png"
 }
 ```
@@ -257,8 +262,8 @@ The third is the remote *URL*. This JSON sent from GCM:
 
 ```javascript
 {
-	title:"Large Icon", 
-	message: "Loaded from URL", 
+	title:"Large Icon",
+	message: "Loaded from URL",
 	image: "https://dl.dropboxusercontent.com/u/887989/antshot.png"
 }
 ```
@@ -273,8 +278,8 @@ In order for your your notification to play a custom sound you will need to add 
 
 ```javascript
 {
-	title:"Sound Test", 
-	message: "Loaded res/raw", 
+	title:"Sound Test",
+	message: "Loaded res/raw",
 	soundname: "test"
 }
 ```
@@ -283,12 +288,12 @@ In order for your your notification to play a custom sound you will need to add 
 
 ### Stacking
 
-By default when using this plugin on Android each notification that your app receives will replace the previous notification in the shade. 
+By default when using this plugin on Android each notification that your app receives will replace the previous notification in the shade.
 
 If you want to see multiple notifications in the shade you will need to provide a notification ID as part of the push data sent to the app. For instance if you send:
 
 ```javascript
-{ 
+{
   title: "Test Push",
   message: "Push number 1"
 }
@@ -297,7 +302,7 @@ If you want to see multiple notifications in the shade you will need to provide 
 Followed by:
 
 ```javascript
-{ 
+{
   title: "Test Push",
   message: "Push number 2"
 }
@@ -306,7 +311,7 @@ Followed by:
 You will only see "Push number 2" in the shade. However, if you send:
 
 ```javascript
-{ 
+{
   title: "Test Push",
   message: "Push number 1",
   notId: 1
@@ -316,7 +321,7 @@ You will only see "Push number 2" in the shade. However, if you send:
 and:
 
 ```javascript
-{ 
+{
   title: "Test Push",
   message: "Push number 2",
   notId: 2
@@ -331,8 +336,8 @@ A better alternative to stacking your notifications is to use the inbox style to
 
 ```javascript
 {
-	title:"My Title", 
-	message: "My first message", 
+	title:"My Title",
+	message: "My first message",
 	style: "inbox",
 	summaryText: "There are %n% notifications"
 }
@@ -346,8 +351,8 @@ But, if you follow it up with subsequent notifications like:
 
 ```javascript
 {
-	title:"My Title", 
-	message: "My second message", 
+	title:"My Title",
+	message: "My second message",
 	style: "inbox",
 	summaryText: "There are %n% notifications"
 }
@@ -365,8 +370,8 @@ Your notification can include action buttons. If you wish to include an icon alo
 
 ```javascript
 {
-	title:"AUX Scrum", 
-	message: "Scrum: Daily touchbase @ 10am Please be on time so we can cover everything on the agenda.", 
+	title:"AUX Scrum",
+	message: "Scrum: Daily touchbase @ 10am Please be on time so we can cover everything on the agenda.",
 	actions: [
 		{ icon: "emailGuests", title: "EMAIL GUESTS", callback: "app.emailGuests"},
 		{ icon: "snooze", title: "SNOOZE", callback: "app.snooze"},
@@ -380,14 +385,50 @@ This will produce the following notification in your tray:
 
 If your users clicks on the main body of the notification your app will be opened. However if they click on either of the action buttons the app will open (or start) and the specified JavaScript callback will be executed. In this case it is `app.emailGuests` and `app.snooze` respectively.
 
+### Led in Notifications
+
+You can use a Led notifcation and choose the color of it. Just add a `ledColor` field in your notification in the ARGB format array:
+
+```javascript
+{
+  title:"Green LED",
+  message: "This is my message with a Green LED",
+  ledColor: [0, 0, 255, 0]
+}
+```
+
+### Vibration Pattern in Notifications
+
+You can set a Vibration Pattern for your notifications. Just add a `vibrationPattern` field in your notification:
+
+```javascript
+{
+  title:"Vibration Pattern",
+  message: "Device should wait for 2 seconds, vibrate for 1 second then be silent for 500 ms then vibrate for 500 ms",
+  vibrationPattern: [2000, 1000, 500, 500]
+}
+```
+
+### Priority in Notifications
+
+You can set a priority parameter for your notifications. Just add a `priority` field in your notification. -2: minimum, -1: low, 0: default , 1: high, 2: maximum priority:
+
+```javascript
+{
+  title:"This is a maximum priority Notification",
+  message: "This notification should appear in front of all others",
+  priority: 2
+}
+```
+
 ### Picture Messages
 
 Perhaps you want to include a large picture in the notification that you are sending to your users. Luckily you can do that too buy sending the following JSON from GCM.
 
 ```javascript
 {
-	title:"Big Picture", 
-	message: "This is my big picture message", 
+	title:"Big Picture",
+	message: "This is my big picture message",
 	style: "picture",
     picture: "http://36.media.tumblr.com/c066cc2238103856c9ac506faa6f3bc2/tumblr_nmstmqtuo81tssmyno1_1280.jpg",
 	summaryText: "The internet is built on cat pictures"
@@ -409,7 +450,7 @@ Then send the follow JSON from APNS:
 ```javascript
 {
     "aps": {
-        "alert": "Test sound", 
+        "alert": "Test sound",
         "sound": "sub.caf"
     }
 }
@@ -427,8 +468,15 @@ For advanced templates and usage, the notification object is included in [`data.
 
 ### Setting Toast Capable Option for Windows
 
-For your app to communicate through a toast notification, you must declare that it is Toast Capable in your app's manifest file. Cordova-windows 4.0.0 release adds this property to config.xml. You can use:
-`<preference name="WindowsToastCapable" value="true" />` in config.xml. However, you will need Cordova 5.1.1 which pins Cordova-windows 4.0.0.
+This plugin automatically sets the toast capable flag to be true for Cordova 5.1.1+. For lower versions, you must declare that it is Toast Capable in your app's manifest file. 
+
+### Disabling the default processing of notifications by Windows
+
+The default handling can be disabled by setting the 'cancel' property in the notification object. 
+
+```
+data.additionalData.pushNotificationReceivedEventArgs.cancel = true
+```
 
 ## Native Requirements
 

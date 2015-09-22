@@ -19,7 +19,7 @@
         </receiver>
         <service android:name="com.adobe.phonegap.push.GCMIntentService" />
     </application>
-    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="21" />
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />

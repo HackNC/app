@@ -21,22 +21,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel='import' href="sprites.svg">
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquery.easing.js"></script>
         <script type="text/javascript" src="js/collapsible.js"></script>
+        <script type="text/javascript" src="js/iscroll.js"></script>
+        <script type="text/javascript" src="js/iscroll-zoom.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
         <title>HackNC</title>
     </head>
     <body>
-        <!-- --------------- Header ------------------ -->
+        <!-- -------------- Header ------------------ -->
         <div class="navbar-fixed">
 					<nav>
+					<ul id="menu" class="menu-close">
+              <li><a class="white-text" href="#info">Info</a></li>
+              <!--li><a class="white-text" href="#irc">IRC Feed</a></li-->
+						</ul>
 						<div class="nav-wrapper header">
 							<a class="brand-logo center grey-text text-lighten-5">HackNC</a>
 <!--            <ul id="nav-mobile" class="left">
@@ -44,29 +49,28 @@
                    <img src="img/speech-bubble86.svg" onclick="setView('notifications');"></img>
                 </li>
               </ul> -->
-							<a id="menu-button" href="#" class="button-collapse">
-								<i class="material-icons grey-text text-lighten-5">menu</i>
+							<a id="menu-button" href="#!" class="button-collapse">
+								<i class="grey-text text-lighten-5 fa fa-bars"></i>
 							</a>
 						</div>
-						<ul id="menu">
-              <li><a class="white-text" href="#info">Info</a></li>              
-              <li><a class="white-text" href="#irc">IRC Feed</a></li>              
-              <li><a class="white-text" href="#social">Social Media</a></li>
-						</ul>
 					</nav>
 				</div>
         <main class="container main-content">
           <div id="notifications">
           	<div class="card">
           		<div class="card-content black-text">
-          			<span class="card-title black-text">Dinner in 30 min!</span>
-          			<p>Come enjoy some wonderful cat food in FB lobby.</p>
+          			<span class="card-title black-text">Welcome to HackNC!</span>
+          			<p>This is the HackNC App! Here are a few things in this app:</p>
+          			<ul>
+          				<li><i class="fa fa-bell"></i> Notifications &amp; Messages</li>
+          				<li><i class="fa fa-compass"></i> Floor Maps</li>
+          				<li><i class="fa fa-question"></i><i class="fa fa-user"></i> Mentor/Help Request</li>
+          				<li><i class="fa fa-calendar"></i> Schedule</li>
+          			</ul>
+          			<p>Have fun hacking!</p>
           		</div>
-							<span class="card-age">
-								30 min
-							</span>
           	</div>
-          	<div class="card">
+          	<!--div class="card">
           		<div class="card-content black-text">
           			<span class="card-title black-text">Cats overtake Sitterson</span>
           			<p>Visit our new feline overlords in Sitterson lobby!</p>
@@ -113,13 +117,13 @@
           	</div>
           	<div class="card">
           		<div class="card-content black-text">
-          			<span class="card-title black-text">Wheel invented -- patent trolls incoming</span>
+          			<span class="card-title black-text">Wheel invented - patent trolls incoming</span>
           			<p>Quick! Get all the royalties!</p>
           		</div>
 							<span class="card-age">
 								50 centuries
 							</span>
-          	</div> 
+          	</div--> 
           </div>
           <!-- -------------- Schedule ------------------- -->
           <div id="schedule">
@@ -175,16 +179,54 @@
             <div class="card">
               <div class="card-content black-text">
                 <span class="card-title black-text">Request a Mentor!</span>
-                <p>Give us some info about your project and we will connect you with a mentor :)</p>
+                <p> Fill out this form, and a mentor will be with your shortly.  You can go hunting for mentors yourself, but this way will probably be quicker and make sure you reach the most qualified person for your problem</p>
+                  <div class="row" id="mreq">
+                    <form class="col s12">
+                      <div class="row">
+                        <br>
+                        <div class="input-field col s12">
+                          <p>Enter your Name</p>
+                          <input placeholder="Placeholder" id="mreq_name" type="text" class="validate">
+                          <label for="name"></label>
+                        </div>
+                        
+                        <div class="input-field col s12">
+                          <p>Describe your problem</p>
+                          <textarea id="mreq_issue"placeholder = "eg.  The internets is broken!!" class="materialize-textarea"></textarea>
+                          <label for="textarea1"></label>
+                          <br>
+                          <a class="waves-effect waves-light btn" onclick="getMentor();">Submit Mentor Request</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
               </div>
             </div>
           </div>
 
           <!-- ---------------- Map ----------------- -->
           <div id="map">
+          	<div id="map-view">
+							<img src="img/sitterson-ground.png" />
+						</div>
+          	<!--div id="map-list">
+							<select>
+								<option value="sitterson">Sitterson</option>
+								<option value="carroll">Carroll</option>
+								<option value="phillips">Phillips</option>
+							</select>
+						</div-->
+          	<div id="map-controls">
+          		<div id="map-controls-zoom-in">
+          			+
+          		</div>
+          		<div id="map-controls-zoom-out">
+          			-
+          		</div>
+          	</div>
           </div>
           <!-- ---------------- Info ----------------- -->
-          <div id="info">
+          <div id="info" >
             <ul class="collapsible" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header"><i class="fa fa-question-circle"></i>Help Desk</div>
@@ -213,29 +255,48 @@
                   <br>Kimmy Lu
                   <br>Twitter @kimmylol</p></div>
               </li>
+              <li>
+                <div class="collapsible-header"><i class="fa fa-twitter"></i>Social Media</div>
+                <div class="collapsible-body"><p>Follow us on social media for fun updates!
+                  <br>
+                  <br><i class="fa fa-twitter"></i> Twitter: @theHackNC
+                  <br><i class="fa fa-facebook"></i> Facebook: HackNC
+                  <br>Snapchat: hacknc
+              </li>
             </ul>
           </div>
-
-
-
+          
           <!-- -------------- Footer ------------------- -->
         </main>
         <footer class="app-footer page-footer transparent">
           <div class="container" style="width: 100%;">
             <div class="row" id="tab-row">
              <ul class="tabs">
-             	<li class="tab col s3 f-icon active-tab"><a href="#notifications"><i class="fa fa-bell"></i></a></li>
-             	<li class="tab col s3 f-icon"><a href="#map"><i class="fa fa-compass"></i></a></li>
-             	<li class="tab col s3 f-icon"><a href="#mentors"><i class="fa fa-users"></i></a></li>
-             	<li class="tab col s3 f-icon"><a href="#schedule"><i class="fa fa-calendar"></i></a></li>
+             	<li class="tab col s3 f-icon active-tab">
+             	<a href="#notifications">
+             	<!-- need position relative here, otherwise the notification count div
+             	will go too far -->
+             	<i class="fa fa-bell button-icon">
+								<div id="notification-count">5</div>
+								<div class="button-alt-text">alerts</div>
+             	</i>
+             	</a>
+             	</li>
+             	<li class="tab col s3 f-icon"><a href="#map"><i class="fa fa-compass button-icon">
+								<div class="button-alt-text">maps</div>
+             	</i></a></li>
+             	<li class="tab col s3 f-icon"><a href="#mentors"><i class="fa fa-users button-icon">
+								<div class="button-alt-text">mentors</div>
+             	</i></a></li>
+             	<li class="tab col s3 f-icon"><a href="#schedule"><i class="fa fa-calendar button-icon">
+								<div class="button-alt-text">schedule</div>
+             	</i></a></li>
              </ul>
             </div>
           </div>
 
         </footer>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript"></script>
-        <!--<script type="text/javascript" src="js/materialize.min.js"></script>-->
+        <script src="js/index.js"></script>
         <script>
             app.initialize();
         </script>
