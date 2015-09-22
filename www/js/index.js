@@ -155,6 +155,7 @@ function setView(name) {
     hideOthers(views, name);
 
 		if (name == "map") {
+			var minMapScale = ($("body").width()-10)/$("#map-view > img").width();
 			app.zoomer = new IScroll("#map-view", {
 				zoom: true,
 				scrollbars: true,
@@ -163,10 +164,10 @@ function setView(name) {
 				freeScroll: true,
 				mouseWheel: true,
 				wheelAction: 'zoom',
-				zoomMin: MAP_ZOOM_MIN,
+				zoomMin: minMapScale,
 				zoomMax: MAP_ZOOM_MAX
 			});
-			app.zoomer.zoom(MAP_ZOOM_MIN, undefined, undefined, 0);
+			app.zoomer.zoom(minMapScale, undefined, undefined, 0);
 		}
 		else {
 			if (app.zoomer) {
