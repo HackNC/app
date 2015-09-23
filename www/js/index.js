@@ -205,8 +205,8 @@ function scheduleLoad(){
     //alert("Load");
     //get JSON
     var url = "http://hacknc.com/schedule/json/student.json";
-    $.getJSON(url , function(data) {
-        for (var i =0 ; i<data.events.length ; i++){
+    var setSchedule = function(data) {
+            for (var i =0 ; i<data.events.length ; i++){
             thisEvent = data.events[i];
             //console.log(thisEvent);
             if (data.events[i].day.toLowerCase() == "friday"){
@@ -221,7 +221,22 @@ function scheduleLoad(){
                 sntable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + "  " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
             }
         }
+    };
+    
+    $.getJSON(url , function(data) {
+        localStorage.schedule = data;
+        console.log(data);
+        setSchedule(data);
+    })
+    .fail(function() {
+        setSchedule(localStorage.schedule);
+        console.log("done");
+    })
+    .always(function() {
+        console.log("done");
     });
+
+    
 	
 }
 
@@ -244,6 +259,26 @@ function getMentor(){
     intro.name = $("#mreq_name").val();
     intro.issue = $("#mreq_issue").val();
     initWS();
+
+    //Fake it for now
+    requestUiUpdate(false);
+}
+
+function cancelMentor() {
+    requestUiUpdate(true);
+}
+
+function requestUiUpdate(showForm){
+    //Remove the request form
+    if(!showForm){
+        $("#request-form-card").hide();
+        $("#submitted").show();
+    } else {
+        $("#request-form-card").show();
+        $("#submitted").hide();
+    }
+
+
 }
 
 function getUserID(){
