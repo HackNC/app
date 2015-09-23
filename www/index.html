@@ -176,7 +176,7 @@
           </div>
           <!-- ---------------- Mentors ----------------- -->
           <div id="mentors">
-            <div class="card">
+            <div id="request-form-card" class="card">
               <div class="card-content black-text">
                 <span class="card-title black-text">Request a Mentor!</span>
                 <p> Fill out this form, and a mentor will be with your shortly.  You can go hunting for mentors yourself, but this way will probably be quicker and make sure you reach the most qualified person for your problem</p>
@@ -200,6 +200,14 @@
                       </div>
                     </form>
                   </div>
+              </div>
+            </div>
+            <div id="submitted" class="card" style="display:none;">
+              <div class="card-content black-text">
+                <span class="card-title black-text">Request Submitted</span>
+                <p> Your request has been submitted! Please allow a maximum of 10 minutes for a response.</p>
+                <br><br>
+                <a class="waves-effect waves-light btn" onclick="cancelMentor();">Cancel Request</a>
               </div>
             </div>
           </div>

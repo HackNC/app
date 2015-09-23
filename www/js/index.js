@@ -236,6 +236,26 @@ function getMentor(){
     intro.name = $("#mreq_name").val();
     intro.issue = $("#mreq_issue").val();
     initWS();
+
+    //Fake it for now
+    requestUiUpdate(false);
+}
+
+function cancelMentor() {
+    requestUiUpdate(true);
+}
+
+function requestUiUpdate(showForm){
+    //Remove the request form
+    if(!showForm){
+        $("#request-form-card").hide();
+        $("#submitted").show();
+    } else {
+        $("#request-form-card").show();
+        $("#submitted").hide();
+    }
+
+
 }
 
 function getUserID(){
