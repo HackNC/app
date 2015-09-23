@@ -131,6 +131,20 @@ body {
 	background-color: #463E47;
 }
 
+@media (max-width: 600px) {
+	#menu > li > a {
+		line-height: 56px;
+		height: 56px;
+	}
+}
+
+@media (min-width: 601px) {
+	#menu > li > a {
+		line-height: 64px;
+		height: 64px;
+	}
+}
+
 .menu-close {
 	transform: translate3d(0, -100%, 0);
 	-moz-transform: translate3d(0, -100%, 0);
