@@ -36,35 +36,65 @@ var t=0;
 
 var app = {
     initialize: function() {
+        FastClick.attach(document.body);
         this.bind();
         //Some things Brandon Does on initial load.
         scheduleLoad();
 		updateNotifications();
         setView('notifications');
 
-        $("#menu-button").on("click", this.toggleMenu);
-
-				// needs to be recomputed for window resize
-				$("#map").css("top", $(".navbar-fixed").height()+"px");
-
-        $("body").on('click', function(ev) {
-					if ($("#menu").hasClass("menu-open")) {
-						app.toggleMenu(ev);
-					}
-				});
-
 		var uuid = window['device'] == undefined ? 'undefined' : device.uuid;
 		$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
 			});
 
-        $("#map-controls-zoom-in").on('click', function() {
+				document.getElementById('menu-button')
+						.addEventListener('click', this.toggleMenu);
+
+				// needs to be recomputed for window resize
+				$("#map").css("top", $(".navbar-fixed").height()+"px");
+
+				/*
+        $("body").on('click', function(ev) {
+					if ($("#menu").hasClass("menu-open")) {
+						app.toggleMenu(ev);
+					}
+				});*/
+
+        document.getElementById("map-controls-zoom-in")
+        		.addEventListener('click', function() {
         	var s = Math.min(this.zoomer.scale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
         	this.zoomer.zoom(s);
         }.bind(this));
-        $("#map-controls-zoom-out").on('click', function() {
+        document.getElementById("map-controls-zoom-out")
+        		.addEventListener('click', function() {
         	var s = Math.max(this.zoomer.scale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
         	this.zoomer.zoom(s);
         }.bind(this));
+
+				// handles primary view switches
+				var activeTab = $("a[href='#notifications']").parent();
+				$("#tab-row li.tab > a").each(function(idx, elm) {
+					elm.addEventListener("click", function(event) {
+						$(activeTab).removeClass("active-tab");
+						$(elm).parent().addClass("active-tab");
+						activeTab = $(elm).parent();
+						setView(elm.hash.substr(1));
+						event.preventDefault();
+						event.stopPropagation();
+						window.scroll(0,0);
+					});
+				});
+
+				$("#menu a").each(function(idx, elm) {
+					elm.addEventListener('click', function(event) {
+						event.preventDefault();
+						event.stopPropagation();
+						$(activeTab).removeClass("active-tab");
+						setView(elm.hash.substr(1));
+					});
+				});
+
+
     },
 
     toggleMenu: function(ev) {
@@ -105,8 +135,9 @@ var app = {
 
         push.on('error', function(e) {
 
-        });    
-	},
+        });
+
+		},
 	
 	bind: function() {
         document.addEventListener('deviceready', this.deviceready, true);
@@ -116,30 +147,6 @@ var app = {
 	
 };
 
-// handles primary view switches
-(function() {
-	var activeTab = $("a[href='#notifications']").parent();
-	$("#tab-row li.tab > a").each(function(idx, elm) {
-		$(elm).on("click", function(event) {
-			$(activeTab).removeClass("active-tab");
-			$(elm).parent().addClass("active-tab");
-			activeTab = $(elm).parent();
-			setView(elm.hash.substr(1));
-			event.preventDefault();
-			event.stopPropagation();
-			window.scroll(0,0);
-		});
-	});
-
-	$("#menu a").each(function(idx, elm) {
-		$(elm).on("click", function(event) {
-			event.preventDefault();
-			event.stopPropagation();
-			$(activeTab).removeClass("active-tab");
-			setView(elm.hash.substr(1));
-		});
-	});
-})();
 
 function setView(name) {
     var activecolor = "#AAAAAA";
@@ -237,6 +244,7 @@ function scheduleLoad(){
 }
 
 function updateNotifications() {
+	return;
 	loading = true;
 	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
 		 cardHTML="";
