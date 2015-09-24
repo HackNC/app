@@ -315,7 +315,7 @@ function onMessage(event){
     console.log(msg);
     if(msg.type == "helpack"){
         $("#submitted-response").text(msg.body);
-        alert(msg.body);
+        //alert(msg.body);
     }
 }
 
