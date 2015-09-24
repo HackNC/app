@@ -14,6 +14,7 @@
 
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="webviewbounce" value="false" />
     <preference name="prerendered-icon" value="true" />
     <preference name="stay-in-webview" value="false" />
