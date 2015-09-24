@@ -198,6 +198,9 @@ function scheduleLoad(){
     //alert("Load");
     //get JSON
     var url = "http://hacknc.com/schedule/json/student.json";
+
+    var scheduleJson;
+
     var setSchedule = function(data) {
             for (var i =0 ; i<data.events.length ; i++){
             thisEvent = data.events[i];
@@ -205,28 +208,28 @@ function scheduleLoad(){
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
                 var fritable = $("#fritable tr:last");
-                fritable.after("<tr><td class='schedule-first'>" + thisEvent.starttime + "  " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
+                fritable.after("<tr><td class='schedule-first'>" + thisEvent.starttime + " - " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
             } else if (thisEvent.day.toLowerCase() == "saturday"){
                 var sattable = $("#sattable tr:last");
-                sattable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + "  " + thisEvent.endtime + "</td><td>" + thisEvent.title + "</td></tr>");
+                sattable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + " - " + thisEvent.endtime + "</td><td>" + thisEvent.title + "</td></tr>");
             } else {
                 var sntable = $("#sntable tr:last");
-                sntable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + "  " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
+                sntable.after("<tr><td class='schedule-first'>"+ thisEvent.starttime + " - " + thisEvent.endtime +  "</td><td>" + thisEvent.title + "</td></tr>");
             }
         }
     };
     
+
+
     $.getJSON(url , function(data) {
+        scheduleJson = data;
         localStorage.schedule = data;
         console.log(data);
         setSchedule(data);
     })
-    .fail(function() {
+    .fail(function(d, textStats, error) {
         setSchedule(localStorage.schedule);
-        console.log("done");
-    })
-    .always(function() {
-        console.log("done");
+        console.log("1done" + error);
     });
 
     
