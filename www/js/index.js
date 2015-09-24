@@ -94,23 +94,7 @@ var app = {
 					});
 				});
 
-				document.getElementById('mreq_name')
-						.addEventListener('focus', function(ev) {
-					$('#footer').hide();
-				});
-				document.getElementById('mreq_name')
-						.addEventListener('blur', function(ev) {
-					$('#footer').show();
-				});
 
-				document.getElementById('mreq_issue')
-						.addEventListener('focus', function(ev) {
-					$('#footer').hide();
-				});
-				document.getElementById('mreq_issue')
-						.addEventListener('blur', function(ev) {
-					$('#footer').show();
-				});
     },
 
     toggleMenu: function(ev) {
@@ -327,8 +311,13 @@ function initWS(){
     }
 
 function onMessage(event){
-      alert(event.data);
+    var msg = JSON.parse(event.data);
+    console.log(msg);
+    if(msg.type == "helpack"){
+        $("#submitted-response").text(msg.body);
+        alert(msg.body);
     }
+}
 
 function onOpen(event){
       console.log(intro);
