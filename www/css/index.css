@@ -97,6 +97,11 @@ body {
     margin:0;
 }
 
+textarea {
+	overflow-x: auto !important;
+	overflow-y: auto !important;
+}
+
 .header {
 	background-color: #463E47;
 	z-index: 99;
