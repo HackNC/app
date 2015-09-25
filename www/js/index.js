@@ -110,6 +110,12 @@ var app = {
 						.addEventListener('blur', function(ev) {
 					$("#footer").show();
 				});
+				document.addEventListener('hidekeyboard', function(ev) {
+					$("#footer").show();
+				});
+				document.addEventListener('showkeyboard', function(ev) {
+					$("#footer").hide();
+				});
     },
 
     toggleMenu: function(ev) {
