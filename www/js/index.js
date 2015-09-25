@@ -34,6 +34,11 @@ var cardHTML = "";
 
 var t=0;
 
+// force rotation on ios
+window.shouldRotateToOrientation = function(deg) {
+	return true;
+};
+
 var app = {
     initialize: function() {
         FastClick.attach(document.body);
