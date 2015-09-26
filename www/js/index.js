@@ -182,9 +182,12 @@ function setView(name) {
     views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
     console.log("view set " + name);
 	if (name == "notifications") {
-		// set number of alerts to zero
-		resetUnreadAlerts();
 		updateNotifications();
+		window.addEventListener('scroll', windowScrollUnreadAlerts);
+		windowScrollUnreadAlerts();
+	}
+	else {
+		window.removeEventListener('scroll', windowScrollUnreadAlerts);
 	}
 
     $("#" + name ).show();
@@ -355,7 +358,7 @@ function onOpen(event){
 
 function addUnreadAlerts() {
 	if (localStorage.unreadAlerts) {
-		if (currentView != 'notifications') {
+		if (currentView != 'notifications' || window.scrollY > 0) {
 			localStorage.unreadAlerts++;
 			$("#notification-count").text(localStorage.unreadAlerts);
 			$("#notification-count").show();
@@ -366,4 +369,9 @@ function addUnreadAlerts() {
 function resetUnreadAlerts() {
 	localStorage.unreadAlerts = 0;
 	$("#notification-count").hide();
+}
+
+function windowScrollUnreadAlerts() {
+	if (window.scrollY == 0)
+		resetUnreadAlerts();
 }
