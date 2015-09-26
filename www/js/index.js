@@ -28,8 +28,6 @@ var MAP_ZOOM_DELTA = 0.4;
 	"body" : "No notifications yet :D"
  }];
  
- var loading = false; 
- 
 var cardHTML = "";
 
 var t=0;
@@ -58,12 +56,11 @@ var app = {
 				// needs to be recomputed for window resize
 				$("#map").css("top", $(".navbar-fixed").height()+"px");
 
-				/*
         $("body").on('click', function(ev) {
 					if ($("#menu").hasClass("menu-open")) {
 						app.toggleMenu(ev);
 					}
-				});*/
+				});
 
         document.getElementById("map-controls-zoom-in")
         		.addEventListener('click', function() {
@@ -148,19 +145,19 @@ var app = {
         });
 		
         push.on('registration', function(data) {
-            console.log(data.registrationId);
+            console.log("register", data.registrationId);
 			//data.registrationId
 			$.get('http://159.203.73.64:9001/reg?id=' + data.registrationId, function(stuff) {
 			});
         });
 
         push.on('notification', function(data) {
-        	console.log("notification event");
+        	console.log("notification event", data);
 			updateNotifications();
         });
 
         push.on('error', function(e) {
-
+					console.log("push error", e);
         });
 
 		},
@@ -272,14 +269,12 @@ function scheduleLoad(){
 }
 
 function updateNotifications() {
-	return;
-	loading = true;
 	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
+		console.log('notification data', data);
 		 cardHTML="";
-		 loading=false;
 		 for (var i = 0; i < data.length; i++) {
-				cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><p>" + data[i].body + "</p></div></div>" + cardHTML;
-				$("#notifications").html(cardHTML);
+				cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><div>" + data[i].message + "</div></div></div>" + cardHTML;
+				$("#notifications-internal").html(cardHTML);
 			}
 	 });
 }
