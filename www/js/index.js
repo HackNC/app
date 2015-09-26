@@ -42,16 +42,11 @@ window.shouldRotateToOrientation = function(deg) {
 var app = {
     initialize: function() {
         FastClick.attach(document.body);
+
         this.bind();
-        //Some things Brandon Does on initial load.
-        scheduleLoad();
-		updateNotifications();
-        setView('notifications');
 
-		var uuid = window['device'] == undefined ? 'undefined' : device.uuid;
-		$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
-			});
-
+        this.deviceready();
+        
 				document.getElementById('menu-button')
 						.addEventListener('click', this.toggleMenu);
 
@@ -136,6 +131,32 @@ var app = {
 	},
 
     deviceready: function() {
+				// set number of alerts to zero
+				if (localStorage.unreadAlerts == undefined)
+					localStorage.unreadAlerts = "0";
+
+				// set seen latest seen alert id to -1
+				if (localStorage.latestSeenAlert == undefined)
+					localStorage.latestSeenAlert = "-1";
+
+				// init alert cache
+				if (localStorage.alertCache == undefined)
+					localStorage.alertCache = JSON.stringify([]);
+
+				//Some things Brandon Does on initial load.
+				scheduleLoad();
+				updateNotifications();
+				setView('notifications');
+
+				////////////////////////////////////////
+				// phone specific things past this point.
+				////////////////////////////////////////
+				if (window['device'] == undefined) return;
+
+				var uuid = device.uuid;
+				$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
+					});
+
         // This is an event handler function, which means the scope is the event.
         // So, we must explicitly called `app.report()` instead of `this.report()`.
 		window.push = PushNotification.init({
@@ -155,16 +176,22 @@ var app = {
 
         push.on('notification', function(data) {
         	console.log("notification event", data);
+        	var id = data.additionalData.id;
+        	console.log('172 ', localStorage);
+        	if (parseInt(localStorage.latestSeenAlert) == id + 1) {
+						JSON.parse(localStorage.alertCache).push({
+							message: data.message,
+							subject: data.title, 
+							id: id
+						});
+        	}
         	addUnreadAlerts();
-			updateNotifications();
+					updateNotifications();
         });
 
         push.on('error', function(e) {
 					console.log("push error", e);
         });
-
-				// set number of alerts to zero
-				resetUnreadAlerts();
 		},
 	
 	bind: function() {
@@ -266,12 +293,13 @@ function scheduleLoad(){
 
     $.getJSON(url , function(data) {
         scheduleJson = data;
-        localStorage.schedule = data;
+        localStorage.schedule = JSON.stringify(data);
         console.log(data);
         setSchedule(data);
     })
     .fail(function(d, textStats, error) {
-        setSchedule(localStorage.schedule);
+    		if (localStorage.schedule)
+					setSchedule(JSON.parse(localStorage.schedule));
         console.log("1done" + error);
     });
 
@@ -280,13 +308,32 @@ function scheduleLoad(){
 }
 
 function updateNotifications() {
+
+  var cardHTML = '';
+  var cache = JSON.parse(localStorage.alertCache);
+	for (var i = 0; i < cache.length; i++) {
+		cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + cache[i].subject + "</span><div>" + cache[i].message + "</div></div></div>" + cardHTML;
+	}
+	$("#notifications-internal").html(cardHTML);
+
 	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
+		var maxid = -1;
+		var newAlertCache = [];
 		console.log('notification data', data);
 		 cardHTML="";
 		 for (var i = 0; i < data.length; i++) {
+		 		maxid = Math.max(maxid, parseInt(data[i].id));
+				newAlertCache.push({
+					message: data[i].message,
+					subject: data[i].subject,
+					id: parseInt(data[i].id)
+				});
+
 				cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><div>" + data[i].message + "</div></div></div>" + cardHTML;
-				$("#notifications-internal").html(cardHTML);
 			}
+			$("#notifications-internal").html(cardHTML);
+			localStorage.latestSeenAlert = maxid.toString();
+			localStorage.alertCache = JSON.stringify(newAlertCache);
 	 });
 }
 function getMentor(){
@@ -359,7 +406,7 @@ function onOpen(event){
 function addUnreadAlerts() {
 	if (localStorage.unreadAlerts) {
 		if (currentView != 'notifications' || window.scrollY > 0) {
-			localStorage.unreadAlerts++;
+			localStorage.unreadAlerts = parseInt(localStorage.unreadAlerts) + 1;
 			$("#notification-count").text(localStorage.unreadAlerts);
 			$("#notification-count").show();
 		}
@@ -367,7 +414,7 @@ function addUnreadAlerts() {
 }
 
 function resetUnreadAlerts() {
-	localStorage.unreadAlerts = 0;
+	localStorage.unreadAlerts = "0";
 	$("#notification-count").hide();
 }
 
