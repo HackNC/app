@@ -163,7 +163,11 @@ var app = {
             "android": {
                 "senderID": "824858956988"
             },
-            "ios": {}, 
+            "ios": {
+            	"alert": "true",
+            	"badge": "true",
+            	"sound": "true"
+						}, 
             "windows": {} 
         });
 		
