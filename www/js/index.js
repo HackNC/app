@@ -32,6 +32,8 @@ var cardHTML = "";
 
 var t=0;
 
+var currentView = "notifications";
+
 // force rotation on ios
 window.shouldRotateToOrientation = function(deg) {
 	return true;
@@ -153,6 +155,7 @@ var app = {
 
         push.on('notification', function(data) {
         	console.log("notification event", data);
+        	addUnreadAlerts();
 			updateNotifications();
         });
 
@@ -160,6 +163,8 @@ var app = {
 					console.log("push error", e);
         });
 
+				// set number of alerts to zero
+				resetUnreadAlerts();
 		},
 	
 	bind: function() {
@@ -177,12 +182,15 @@ function setView(name) {
     views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
     console.log("view set " + name);
 	if (name == "notifications") {
+		// set number of alerts to zero
+		resetUnreadAlerts();
 		updateNotifications();
 	}
 
     $("#" + name ).show();
     $("." + name ).eq(0).css("fill" , activecolor);
     hideOthers(views, name);
+    currentView = name;
 
 		if (name == "map") {
 			var minMapScale = ($("body").width()-10)/$("#map-view > img").width();
@@ -344,3 +352,18 @@ function onOpen(event){
       console.log(intro);
       ws.send(JSON.stringify(intro));
     }
+
+function addUnreadAlerts() {
+	if (localStorage.unreadAlerts) {
+		if (currentView != 'notifications') {
+			localStorage.unreadAlerts++;
+			$("#notification-count").text(localStorage.unreadAlerts);
+			$("#notification-count").show();
+		}
+	}
+}
+
+function resetUnreadAlerts() {
+	localStorage.unreadAlerts = 0;
+	$("#notification-count").hide();
+}
