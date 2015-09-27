@@ -154,7 +154,7 @@ var app = {
 				if (window['device'] == undefined) return;
 
 				var uuid = device.uuid;
-				$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
+				$.get('http://152.23.3.213:9001/reg?id=' + uuid, function(stuff) {
 					});
 
         // This is an event handler function, which means the scope is the event.
@@ -174,7 +174,7 @@ var app = {
         push.on('registration', function(data) {
             console.log("register", data.registrationId);
 			//data.registrationId
-			$.get('http://159.203.73.64:9001/reg?id=' + data.registrationId, function(stuff) {
+			$.get('http://152.23.3.213:9001/reg?id=' + data.registrationId, function(stuff) {
 			});
         });
 
@@ -320,7 +320,7 @@ function updateNotifications() {
 	}
 	$("#notifications-internal").html(cardHTML);
 
-	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
+	$.getJSON("http://152.23.3.213:9001/archive" , function(data) {
 		var maxid = -1;
 		var newAlertCache = [];
 		console.log('notification data', data);
