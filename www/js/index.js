@@ -45,7 +45,8 @@ var app = {
 
         this.bind();
 
-        this.deviceready();
+				if (window['device'] === undefined)
+					this.deviceready();
         
 				document.getElementById('menu-button')
 						.addEventListener('click', this.toggleMenu);
@@ -266,6 +267,7 @@ function hideOthers(views, name){
         });
     }
 }
+
 function scheduleLoad(){
     //alert("Load");
     //get JSON
@@ -274,41 +276,39 @@ function scheduleLoad(){
     var scheduleJson;
 
     var setSchedule = function(data) {
-            for (var i =0 ; i<data.events.length ; i++){
+					var fritable = "";
+					var sattable = "";
+					var sntable = "";
+
+				for (var i =0 ; i<data.events.length ; i++){
             thisEvent = data.events[i];
             //console.log(thisEvent);
             var elem = "<tr><td class='schedule-first'>" + thisEvent.starttime + (thisEvent.endtime ? " - " + thisEvent.endtime : " " ) +  "</td><td>" + thisEvent.title + "</td></tr>";
 
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
-                var fritable = $("#fritable tr:last");
-                fritable.after(elem);
+                fritable += elem;
             } else if (thisEvent.day.toLowerCase() == "saturday"){
-                var sattable = $("#sattable tr:last");
-                sattable.after(elem);
+            		sattable += elem;
             } else {
-                var sntable = $("#sntable tr:last");
-                sntable.after(elem);
+            		sntable += elem;
             }
         }
+        $("#fritable > tbody").html(fritable);
+        $("#sattable > tbody").html(sattable);
+        $("#sntable > tbody").html(sntable);
     };
     
-
+    if (localStorage.schedule) {
+    	setSchedule(JSON.parse(localStorage.schedule));
+    }
 
     $.getJSON(url , function(data) {
         scheduleJson = data;
         localStorage.schedule = JSON.stringify(data);
         console.log(data);
         setSchedule(data);
-    })
-    .fail(function(d, textStats, error) {
-    		if (localStorage.schedule)
-					setSchedule(JSON.parse(localStorage.schedule));
-        console.log("1done" + error);
     });
-
-    
-	
 }
 
 function updateNotifications() {
