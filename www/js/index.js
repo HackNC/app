@@ -154,10 +154,6 @@ var app = {
 				////////////////////////////////////////
 				if (window['device'] == undefined) return;
 
-				var uuid = device.uuid;
-				$.get('http://159.203.73.64:9001/reg?id=' + uuid, function(stuff) {
-					});
-
         // This is an event handler function, which means the scope is the event.
         // So, we must explicitly called `app.report()` instead of `this.report()`.
 		window.push = PushNotification.init({
@@ -175,7 +171,7 @@ var app = {
         push.on('registration', function(data) {
             console.log("register", data.registrationId);
 			//data.registrationId
-			$.get('http://159.203.73.64:9001/reg?id=' + data.registrationId, function(stuff) {
+			$.get('http://159.203.73.64:9001/reg?id=' + data.registrationId + "&platform=" + device.platform, function(stuff) {
 			});
         });
 
