@@ -392,7 +392,7 @@ function initWS(){
 function onMessage(event){
     var msg = JSON.parse(event.data);
     console.log(msg);
-    if(msg.type == "helpack"){
+    if(msg.type == "response"){
         $("#submitted-response").text(msg.body);
         //alert(msg.body);
     }
