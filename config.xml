@@ -8,7 +8,7 @@
         HackNC
     </author>
     <content src="index.html" />
-    <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="phonegap-version" value="3.7.0" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
 
@@ -32,7 +32,7 @@
     <!--gap:plugin name="org.apache.cordova.media-capture" /-->
     <!--gap:plugin name="org.apache.cordova.console" /-->
     <!--gap:plugin name="org.apache.cordova.contacts" /-->
-    <gap:plugin name="org.apache.cordova.device" source="npm" />
+    <gap:plugin name="org.apache.cordova.device" />
     <!--gap:plugin name="org.apache.cordova.device-motion" /-->
     <!--gap:plugin name="org.apache.cordova.device-orientation" /-->
     <!--gap:plugin name="org.apache.cordova.dialogs" /-->
@@ -43,7 +43,7 @@
     <!--gap:plugin name="org.apache.cordova.inappbrowser" /-->
     <!--gap:plugin name="org.apache.cordova.media" /-->
     <!--gap:plugin name="org.apache.cordova.network-information" /-->
-    <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
     <!--gap:plugin name="org.apache.cordova.vibration" /-->
 
     <!--fix the ios statusbar-->
@@ -112,7 +112,7 @@
     <gap:plugin name="phonegap-plugin-push" source="npm" version="1.2.3" />
 
     <access origin="*" />
-    <plugin name="cordova-plugin-whitelist" version="1" source="npm" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
