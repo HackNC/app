@@ -171,7 +171,7 @@ var app = {
         push.on('registration', function(data) {
             console.log("register", data.registrationId);
 			//data.registrationId
-			$.get('http://159.203.73.64:9001/reg?id=' + data.registrationId + "&platform=" + device.platform, function(stuff) {
+			$.get('http://tv.hacknc.com/reg?id=' + data.registrationId + "&platform=" + device.platform, function(stuff) {
 			});
         });
 
@@ -316,7 +316,7 @@ function updateNotifications() {
 	}
 	$("#notifications-internal").html(cardHTML);
 
-	$.getJSON("http://159.203.73.64:9001/archive" , function(data) {
+	$.getJSON("http://tv.hacknc.com/archive" , function(data) {
 		var maxid = -1;
 		var newAlertCache = [];
 		console.log('notification data', data);
