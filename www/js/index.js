@@ -22,12 +22,12 @@ var intro = null;
 var MAP_ZOOM_MIN = 0.2;
 var MAP_ZOOM_MAX = 4;
 var MAP_ZOOM_DELTA = 0.4;
- 
+
  var notificationCache = [{
 	"subject" : "",
 	"body" : "No notifications yet :D"
  }];
- 
+
 var cardHTML = "";
 
 var t=0;
@@ -47,7 +47,7 @@ var app = {
 
 				if (window['device'] === undefined)
 					this.deviceready();
-        
+
 				document.getElementById('menu-button')
 						.addEventListener('click', this.toggleMenu);
 
@@ -164,10 +164,10 @@ var app = {
             	"alert": "true",
             	"badge": "true",
             	"sound": "true"
-						}, 
-            "windows": {} 
+						},
+            "windows": {}
         });
-		
+
         push.on('registration', function(data) {
             console.log("register", data.registrationId);
 			//data.registrationId
@@ -182,7 +182,7 @@ var app = {
         	if (parseInt(localStorage.latestSeenAlert) == id + 1) {
 						JSON.parse(localStorage.alertCache).push({
 							message: data.message,
-							subject: data.title, 
+							subject: data.title,
 							id: id
 						});
         	}
@@ -194,13 +194,13 @@ var app = {
 					console.log("push error", e);
         });
 		},
-	
+
 	bind: function() {
         document.addEventListener('deviceready', this.deviceready, true);
 		document.addEventListener("resume", this.onResume, false);
 
     },
-	
+
 };
 
 
@@ -294,7 +294,7 @@ function scheduleLoad(){
         $("#sattable > tbody").html(sattable);
         $("#sntable > tbody").html(sntable);
     };
-    
+
     if (localStorage.schedule) {
     	setSchedule(JSON.parse(localStorage.schedule));
     }
@@ -342,6 +342,11 @@ function getMentor(){
     intro.uid = getUserID();
     intro.name = $("#mreq_name").val();
     intro.issue = $("#mreq_issue").val();
+    intro.skills = [];
+    var checkedBoxes = document.querySelectorAll('input[name=skill]:checked');
+    for(i = 0; i< checkedBoxes.length; i++){
+      intro.skills[i] = checkedBoxes[i].val();
+    }
     initWS();
 
     //Fake it for now

@@ -127,7 +127,7 @@ textarea {
 }
 
 .app-footer {
-    height: 70px; 
+    height: 70px;
     position: fixed;
     bottom: -1px;
     width:100%;
@@ -375,4 +375,13 @@ textarea {
 .button-icon {
 	position: relative;
 	top: 9px;
+}
+
+.skill {
+  padding: 7px;
+}
+.skill-label {
+  padding-right: 30px;
+  width: 120px;
+  margin-top: 20px;
 }
