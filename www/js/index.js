@@ -343,12 +343,10 @@ function getMentor(){
     intro.name = $("#mreq_name").val();
     intro.issue = $("#mreq_issue").val();
     intro.skills = [];
-    var checkedBoxes = document.querySelectorAll('input[name=skill]:checked');
-    for(i = 0; i< checkedBoxes.length; i++){
-      intro.skills[i] = checkedBoxes[i].val();
-    }
+    $('#checkboxes input:checked').each(function () {
+        intro.skills.push($(this).attr('name'));
+    });
     initWS();
-
     //Fake it for now
     requestUiUpdate(false);
 }

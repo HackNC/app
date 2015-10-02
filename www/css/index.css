@@ -378,10 +378,13 @@ textarea {
 }
 
 .skill {
-  padding: 7px;
+
 }
 .skill-label {
   padding-right: 30px;
   width: 120px;
   margin-top: 20px;
+}
+.cbox {
+    padding:20px;
 }
