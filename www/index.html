@@ -202,35 +202,50 @@
 
                         <div class="input-field col s12">
                           <p>Describe your problem</p>
+                          <textarea id="mreq_issue"placeholder = "eg. My computer is on fire!" class="materialize-textarea"></textarea>
+                          <label for="textarea1"></label>
                           <div id="checkboxes">
-                            <textarea id="mreq_issue"placeholder = "eg. My computer is on fire!" class="materialize-textarea"></textarea>
-                            <label for="textarea1"></label>
-                            <span class="cbox">
-                              <input name="ruby" class="skill" type="checkbox" id="ruby" />
-                              <label for="ruby">Ruby</label>
-                            </span>
-                            <span class="cbox">
-                              <input  name="python" class="skill" type="checkbox" id="python"  />
-                              <label   for="python">Python</label>
-                            </span> 
-                            <span class="cbox">
-                              <input  name="c-sharp" class="skill" type="checkbox" id="c-sharp" />
-                              <label  for="c-sharp">C#</label>
-                            </span>
-                            <span class="cbox">
-                              <input  name="java" class="skill" type="checkbox" id="java" />
-                              <label   for="java">Java</label>
-                            </span>
-                            <span class="cbox">
-                              <input  name="cpp" class="skill" type="checkbox" id="cpp" />
-                              <label   for="cpp">C++ / C</label>
-                            </span>
-                            <br><br><br>
-                            <a class="waves-effect waves-light btn" onclick="getMentor();">Submit Mentor Request</a>
+                            <div id="languages-checkboxes">
+                              <p> Languages </p>
+                              <span class="cbox">
+                                <input name="ruby" class="skill" type="checkbox" id="ruby" />
+                                <label for="ruby">Ruby</label>
+                              </span>
+                              <span class="cbox">
+                                <input  name="python" class="skill" type="checkbox" id="python"  />
+                                <label   for="python">Python</label>
+                              </span> 
+                              <span class="cbox">
+                                <input  name="c-sharp" class="skill" type="checkbox" id="c-sharp" />
+                                <label  for="c-sharp">C#</label>
+                              </span>
+                              <span class="cbox">
+                                <input  name="java" class="skill" type="checkbox" id="java" />
+                                <label   for="java">Java</label>
+                              </span>
+                              <span class="cbox">
+                                <input  name="cpp" class="skill" type="checkbox" id="cpp" />
+                                <label   for="cpp">C++ / C</label>
+                              </span>
+                            </div>
                             <br>
+                            <div id="technologies-checkboxes">
+                              <p> Technologies </p>
+                              <span class="cbox">
+                                <input name="sql" class="skill" type="checkbox" id="sql" />
+                                <label for="sql">SQL</label>
+                              </span>
+                              <span class="cbox">
+                                <input  name="nodejs" class="skill" type="checkbox" id="nodejs"  />
+                                <label   for="nodejs">Node.js</label>
+                              </span> 
+                              <br><br><br>
+                              <br>
+                              <a class="waves-effect waves-light btn" onclick="getMentor();">Submit Mentor Request</a>                              
+                            </div>
                           </div>
+                          <br>                          
                         </div>
-
                       </div>
                     </form>
                   </div>
