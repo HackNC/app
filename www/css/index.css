@@ -278,7 +278,7 @@ textarea {
 
 #map-controls {
 	position: fixed;
-	top: 70px;
+	bottom: 70px;
 	right: 15px;
 	font-size: 2em;
 	z-index: 666;
@@ -303,7 +303,7 @@ textarea {
 
 #map-list {
 	position: fixed;
-	top: 70px;
+	bottom: 70px;
 	right: 55px;
 	z-index: 666;
 }
