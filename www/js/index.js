@@ -342,6 +342,7 @@ function getMentor(){
     intro.uid = getUserID();
     intro.name = $("#mreq_name").val();
     intro.issue = $("#mreq_issue").val();
+    intro.email = $("#mreq_email").val();
     intro.skills = [];
     $('#checkboxes input:checked').each(function () {
         intro.skills.push($(this).attr('name'));
@@ -352,6 +353,12 @@ function getMentor(){
 }
 
 function cancelMentor() {
+    //send a server message saying we want to cancel the request
+    var cancel = {
+        "type" : "remove",
+        "uid" : getUserID()
+    };
+    ws.send(JSON.stringify(cancel));
     requestUiUpdate(true);
 }
 
