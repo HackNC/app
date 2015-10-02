@@ -385,6 +385,13 @@ textarea {
   width: 120px;
   margin-top: 20px;
 }
+#languages-checkboxes, #technologies-checkboxes{
+	float: left;
+}
+#technologies-checkboxes{
+	padding-top: 20px;
+}
 .cbox {
-    padding:20px;
+	display: inline;
+    padding: 20px;
 }
