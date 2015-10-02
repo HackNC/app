@@ -20,7 +20,7 @@ var wsuri = "ws://lmc.redspin.net:9000";
 var intro = null;
 
 var MAP_ZOOM_MIN = 0.2;
-var MAP_ZOOM_MAX = 4;
+var MAP_ZOOM_MAX = 1;
 var MAP_ZOOM_DELTA = 0.4;
 
  var notificationCache = [{
@@ -116,6 +116,18 @@ var app = {
 				document.addEventListener('showkeyboard', function(ev) {
 					$("#footer").hide();
 				});
+
+				var maps = [
+					'sitterson0',
+					'phillips2',
+					'chapman',
+				];
+				$("#map-list-select").on("change", function() {
+					var map = maps[this.selectedIndex];
+					$("#map-view > img").attr("src", "img/" + map + ".png");
+				});
+
+				$("#map-view > img").on("load", resetMap);
     },
 
     toggleMenu: function(ev) {
@@ -203,6 +215,26 @@ var app = {
 
 };
 
+function resetMap() {
+	if (app.zoomer) {
+		app.zoomer.destroy();
+		app.zoomer = null;
+	}
+	var $img = $("#map-view > img");
+	var minMapScale = ($("body").width()-10)/$img.width();
+	app.zoomer = new IScroll("#map-view", {
+		zoom: true,
+		scrollbars: true,
+		scrollX: true,
+		scrollY: true,
+		freeScroll: true,
+		mouseWheel: true,
+		wheelAction: 'zoom',
+		zoomMin: minMapScale,
+		zoomMax: MAP_ZOOM_MAX
+	});
+	app.zoomer.zoom(minMapScale, undefined, undefined, 0);
+}
 
 function setView(name) {
     var activecolor = "#AAAAAA";
@@ -224,19 +256,7 @@ function setView(name) {
     currentView = name;
 
 		if (name == "map") {
-			var minMapScale = ($("body").width()-10)/$("#map-view > img").width();
-			app.zoomer = new IScroll("#map-view", {
-				zoom: true,
-				scrollbars: true,
-				scrollX: true,
-				scrollY: true,
-				freeScroll: true,
-				mouseWheel: true,
-				wheelAction: 'zoom',
-				zoomMin: minMapScale,
-				zoomMax: MAP_ZOOM_MAX
-			});
-			app.zoomer.zoom(minMapScale, undefined, undefined, 0);
+			resetMap();
 		}
 		else {
 			if (app.zoomer) {
@@ -302,7 +322,6 @@ function scheduleLoad(){
     $.getJSON(url , function(data) {
         scheduleJson = data;
         localStorage.schedule = JSON.stringify(data);
-        console.log(data);
         setSchedule(data);
     });
 }
