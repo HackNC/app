@@ -391,9 +391,6 @@ textarea {
 #languages-checkboxes, #technologies-checkboxes{
 	float: left;
 }
-#technologies-checkboxes{
-	padding-top: 20px;
-}
 .cbox {
 	display: inline;
   padding-right: 20px;
