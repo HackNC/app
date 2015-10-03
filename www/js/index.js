@@ -94,21 +94,17 @@ var app = {
 					});
 				});
 
-				document.getElementById('mreq_name')
-						.addEventListener('focus', function(ev) {
-					$("#footer").hide();
-				});
-				document.getElementById('mreq_name')
-						.addEventListener('blur', function(ev) {
+				$("#mentors input[type='text']").on('blur', function(ev) {
 					$("#footer").show();
 				});
-				document.getElementById('mreq_issue')
-						.addEventListener('focus', function(ev) {
+				$("#mentors input[type='text']").on('focus', function(ev) {
 					$("#footer").hide();
 				});
-				document.getElementById('mreq_issue')
-						.addEventListener('blur', function(ev) {
+				$("#mentors textarea").on('blur', function(ev) {
 					$("#footer").show();
+				});
+				$("#mentors textarea").on('focus', function(ev) {
+					$("#footer").hide();
 				});
 				document.addEventListener('hidekeyboard', function(ev) {
 					$("#footer").show();
@@ -120,7 +116,10 @@ var app = {
 				var maps = [
 					'sitterson0',
 					'phillips2',
-					'chapman',
+					'phillips3',
+					'carroll0',
+					'carroll1',
+					'chapman'
 				];
 				$("#map-list-select").on("change", function() {
 					var map = maps[this.selectedIndex];

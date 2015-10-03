@@ -278,7 +278,7 @@ textarea {
 
 #map-controls {
 	position: fixed;
-	top: 70px;
+	bottom: 70px;
 	right: 15px;
 	font-size: 2em;
 	z-index: 666;
@@ -303,7 +303,7 @@ textarea {
 
 #map-list {
 	position: fixed;
-	top: 70px;
+	bottom: 70px;
 	right: 55px;
 	z-index: 666;
 }
@@ -396,5 +396,13 @@ textarea {
 }
 .cbox {
 	display: inline;
-    padding: 20px;
+  padding-right: 20px;
+}
+
+#tables table tr {
+	border-top: 1px solid #ccc;
+}
+
+#tables table tr:nth-child(odd) {
+	background-color: #f9f9f9;
 }
