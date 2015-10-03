@@ -58,12 +58,12 @@
         </div>
         <main class="container main-content">
           <div id="notifications">
-          	<div id="notifications-internal">
-          	</div>
+          	<div id="notifications-internal"> 
+            </div>
           	<div class="card">
-          		<div class="card-content black-text">
-          			<span class="card-title black-text">Welcome to HackNC!</span>
-          			<div>
+              <div class="card-content black-text">
+                <span class="card-title black-text">Welcome to HackNC!</span>
+                <div>
                  <p>This is the HackNC App! Here are a few things in this app:</p>
                  <ul>
                   <li><i class="fa fa-bell"></i> Announcements &amp; Alerts</li>
@@ -73,6 +73,30 @@
                 </ul>
                 <p>Have fun hacking!</p>
               </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content black-text">
+              <span class="card-title black-text">Event sponsor</span>
+              <img class="responsive-img" src="img/ibm.png" alt="IBM"/><br>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content black-text">
+              <span class="card-title black-text">Event sponsor</span>
+              <img class="responsive-img" src="img/sql_sentry.png" alt="SQL Sentry"/><br>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content black-text">
+              <span class="card-title black-text">Event sponsor</span>
+              <img class="responsive-img" src="img/esri.png" alt="Esri"/><br>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content black-text">
+              <span class="card-title black-text">Event sponsor</span>
+              <img class="responsive-img" src="img/c1.png" alt="Capital One"/><br>
             </div>
           </div>
         </div>
@@ -337,75 +361,81 @@
     <ul class="collapsible" data-collapsible="accordion">
       <li>
         <div class="collapsible-header"><i class="fa fa-question-circle"></i>Help Desk</div>
-        <div class="collapsible-body"><p>The Help Desk is located in Sitterson Lobby top floor.  If you need help with wifi, want to check out hardware, or have general questions, please visit the help desk!</p></div>
+        <div class="collapsible-body">
+          <p>There are many places you can go to get help! There is a help desk located in Phillips 275-276 and another help desk in Sitterson Lobby. If you need help with wifi, need to find a mentor, or have general questions, please visit the help desk! Hardware checkout is located in Phillips 275-276.</p>
+        </div>
       </li>
       <li>
         <div class="collapsible-header"><i class="fa fa-comments"></i>IRC Channel</div>
-        <div class="collapsible-body"><p>HackNC has an IRC Channel!<br><br>Join #HackNC on irc.freenode.com to chat with fellow hackers.</p></div>
+        <div class="collapsible-body">
+          <p>HackNC has an IRC Channel!<br>
+          Join #HackNC on irc.freenode.com to chat with fellow hackers.</p>
+        </div>
       </li>
       <li>
         <div class="collapsible-header"><i class="fa fa-briefcase"></i>Sponsors</div>
-        <div class="collapsible-body"><p>HackNC is proudly sponsored by:
-          <br>Capital One
-          <br>Lenovo
-          <br>SQL Sentry
-          <br>IBM
-          <br>Other people</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="fa fa-user"></i>Mentor Profiles</div>
-          <div class="collapsible-body"><p>The following mentors are here to help you!
-            <br>
-            <br>Jimbo Slice
-            <br>Twitter @lolrofl
-            <br>
-            <br>Kimmy Lu
-            <br>Twitter @kimmylol</p></div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="fa fa-twitter"></i>Social Media</div>
-            <div class="collapsible-body"><p>Follow us on social media for fun updates!
-              <br>
-              <br><i class="fa fa-twitter"></i> Twitter: @theHackNC
-              <br><i class="fa fa-facebook"></i> Facebook: HackNC
-              <br>Snapchat: hacknc
-            </li>
-          </ul>
+        <div class="collapsible-body">
+          <p>HackNC is brought to you in part by:<br>
+            <img class="responsive-img" src="img/c1.png" alt="Capital One"/><br>
+            <img class="responsive-img" src="img/esri.png" alt="Esri"/><br>
+            <img class="responsive-img" src="img/sql_sentry.png" alt="SQL Sentry"/><br>
+            <img class="responsive-img" src="img/ibm.png" alt="IBM"/><br>
+          </p>
         </div>
-
-        <!-- -------------- Footer ------------------- -->
-      </main>
-      <footer id="footer" class="app-footer page-footer transparent">
-        <div class="container" style="width: 100%;">
-          <div class="row" id="tab-row">
-           <ul class="tabs">
-            <li class="tab col s3 f-icon active-tab">
-              <a href="#notifications">
-             	<!-- need position relative here, otherwise the notification count div
-             	will go too far -->
-             	<i class="fa fa-bell button-icon">
-                <div style="display: none;" id="notification-count"></div>
-                <div class="button-alt-text">alerts</div>
-              </i>
-            </a>
-          </li>
-          <li class="tab col s3 f-icon"><a href="#map"><i class="fa fa-compass button-icon">
-            <div class="button-alt-text">maps</div>
-          </i></a></li>
-          <li class="tab col s3 f-icon"><a href="#mentors"><i class="fa fa-users button-icon">
-            <div class="button-alt-text">mentors</div>
-          </i></a></li>
-          <li class="tab col s3 f-icon"><a href="#schedule"><i class="fa fa-calendar button-icon">
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="fa fa-twitter"></i>Social Media</div>
+        <div class="collapsible-body">
+          <p>Follow us on social media for fun updates!<br>
+            <br><i class="fa fa-twitter"></i> Twitter: @theHackNC
+            <br><i class="fa fa-facebook"></i> Facebook: HackNC
+            <br>Snapchat: hacknc
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</main>
+<footer id="footer" class="app-footer page-footer transparent">
+  <div class="container" style="width: 100%;">
+    <div class="row" id="tab-row">
+      <ul class="tabs">
+        <li class="tab col s3 f-icon active-tab">
+          <a href="#notifications">
+           	<!-- need position relative here, otherwise the notification count div
+           	will go too far -->
+           	<i class="fa fa-bell button-icon">
+              <div style="display: none;" id="notification-count"></div>
+              <div class="button-alt-text">alerts</div>
+            </i>
+          </a>
+        </li>
+        <li class="tab col s3 f-icon">
+          <a href="#map">
+            <i class="fa fa-compass button-icon">
+              <div class="button-alt-text">maps</div>
+            </i>
+          </a>
+        </li>
+        <li class="tab col s3 f-icon">
+          <a href="#mentors">
+            <i class="fa fa-users button-icon">
+              <div class="button-alt-text">mentors</div>
+            </i>
+          </a>
+        </li>
+        <li class="tab col s3 f-icon">
+          <a href="#schedule">
+            <i class="fa fa-calendar button-icon">
             <div class="button-alt-text">schedule</div>
-          </i></a></li>
-        </ul>
-      </div>
+            </i>
+          </a>
+        </li>
+      </ul>
     </div>
-
-  </footer>
-  <script src="js/index.js"></script>
-  <script>
-    app.initialize();
-  </script>
+  </div>
+</footer>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">app.initialize();</script>
 </body>
 </html>
