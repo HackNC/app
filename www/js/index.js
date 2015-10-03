@@ -119,7 +119,8 @@ var app = {
 					'phillips3',
 					'carroll0',
 					'carroll1',
-					'chapman'
+					'chapman',
+					'outside'
 				];
 				$("#map-list-select").on("change", function() {
 					var map = maps[this.selectedIndex];
