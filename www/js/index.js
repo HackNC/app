@@ -221,7 +221,7 @@ function resetMap() {
 		app.zoomer = null;
 	}
 	var $img = $("#map-view > img");
-	var minMapScale = ($("body").width()-10)/$img.width();
+	var minMapScale = Math.min(($("body").width()-10)/$img.width(), MAP_ZOOM_MAX);
 	app.zoomer = new IScroll("#map-view", {
 		zoom: true,
 		scrollbars: true,
