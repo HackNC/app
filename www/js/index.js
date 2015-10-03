@@ -422,9 +422,26 @@ function onMessage(event){
     var msg = JSON.parse(event.data);
     console.log(msg);
     if(msg.type == "response"){
+        $("#submitted-waiting").show();
         $("#submitted-response").text(msg.body);
-        //alert(msg.body);
+    } else if (msg.type == "respond"){
+        var name = "<p>Name: "+ msg.body.name + "</p>";
+        var location = "<p>Location "+ msg.body.location + " </p>";
+        var message = "<p>Message: " + msg.body.message + "</p>";
+        var email = "<p>Email: " + msg.body.email + "</p>";
+        $("#submitted-mentor-response").show();
+        $("#submitted-response-2").empty();
+        $("#submitted-response-2").append(name);
+        $("#submitted-response-2").append(location);
+        $("#submitted-response-2").append(message);
+        $("#submitted-response-2").append(email);
+        $("#submitted-waiting").hide();
     }
+}
+function newRequest(){
+    $("#submitted").hide();
+    $("#submitted-mentor-response").hide();
+    $("#request-form-card").show();
 }
 
 function onOpen(event){
