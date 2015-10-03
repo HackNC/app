@@ -168,152 +168,151 @@
                 <div class="row">
                   <div class="input-field col s12">
                     <p>Name</p>
-                    <input placeholder="Awesome Developer" id="mreq_name" type="text" class="validate">
+                    <input placeholder="Ada Lovelace" id="mreq_name" type="text" class="validate">
                     <label for="mreq_name"></label>
                   </div>
                   <div class="input-field col s12">
-                    <p>Response Email Address</p>
+                    <p>Your Email Address</p>
                     <input placeholder="node@js.com" id="mreq_email" type="text" class="validate">
                     <label for="mreq_email"></label>
+                  </div>
+                  <div id="checkboxes">
+                    <div id="languages-checkboxes" class="col s12 m6">
+                      <p>Languages</p>
+                      <div class="row">
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="cpp" class="skill" type="checkbox" id="cpp"/>
+                            <label for="cpp">C/C++</label>
+                          </span>
+                        </div>
+                        <div class="col s12"> 
+                          <span class="cbox">
+                            <input name="java" class="skill" type="checkbox" id="java"/>
+                            <label for="java">Java</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="c-sharp" class="skill" type="checkbox" id="c-sharp"/>
+                            <label for="c-sharp">C#</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="swift" class="skill" type="checkbox" id="swift"/>
+                            <label for="swift">Swift</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="python" class="skill" type="checkbox" id="python"  />
+                            <label for="python">Python</label>
+                          </span> 
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="ruby" class="skill" type="checkbox" id="ruby"/>
+                            <label for="ruby">Ruby</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="php" class="skill" type="checkbox" id="php"/>
+                            <label for="php">PHP</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="htmlcss" class="skill" type="checkbox" id="htmlcss"/>
+                            <label for="htmlcss">HTML/CSS</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="js" class="skill" type="checkbox" id="js"/>
+                            <label for="js">Javascript</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="otherlang" class="skill" type="checkbox" id="otherlang"/>
+                            <label for="otherlang">Specified in message</label>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="technologies-checkboxes" class="col s12 m6">
+                      <p>Technologies</p>
+                      <div class="row">
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="sql" class="skill" type="checkbox" id="sql"/>
+                            <label for="sql">SQL</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="esri" class="skill" type="checkbox" id="esri"/>
+                            <label for="esri">Esri</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="ibm" class="skill" type="checkbox" id="ibm"/>
+                            <label for="ibm">IBM Bluemix</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="nodejs" class="skill" type="checkbox" id="nodejs"  />
+                            <label for="nodejs">Node.js</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="unity" class="skill" type="checkbox" id="unity"  />
+                            <label for="unity">Unity</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="phonegap" class="skill" type="checkbox" id="phonegap"  />
+                            <label for="phonegap">Phonegap</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="ios" class="skill" type="checkbox" id="ios"  />
+                            <label for="ios">iOS</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="android" class="skill" type="checkbox" id="android"  />
+                            <label for="android">Android</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="windows" class="skill" type="checkbox" id="windows"  />
+                            <label for="windows">Windows</label>
+                          </span>
+                        </div>
+                        <div class="col s12">
+                          <span class="cbox">
+                            <input name="othertech" class="skill" type="checkbox" id="othertech"  />
+                            <label for="othertech">Specified in message</label>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="input-field col s12">
                     <p>Describe your problem</p>
                     <textarea id="mreq_issue" placeholder="eg. My computer is on fire!" class="materialize-textarea"></textarea>
-                    <label for="textarea1"></label>
-                    <div id="checkboxes" class="row">
-                      <div id="languages-checkboxes" class="col s12 m6">
-                        <p>Languages</p>
-                        <div class="row">
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="cpp" class="skill" type="checkbox" id="cpp"/>
-                              <label for="cpp">C/C++</label>
-                            </span>
-                          </div>
-                          <div class="col s12"> 
-                            <span class="cbox">
-                              <input name="java" class="skill" type="checkbox" id="java"/>
-                              <label for="java">Java</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="c-sharp" class="skill" type="checkbox" id="c-sharp"/>
-                              <label for="c-sharp">C#</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="swift" class="skill" type="checkbox" id="swift"/>
-                              <label for="swift">Swift</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="python" class="skill" type="checkbox" id="python"  />
-                              <label for="python">Python</label>
-                            </span> 
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="ruby" class="skill" type="checkbox" id="ruby"/>
-                              <label for="ruby">Ruby</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="php" class="skill" type="checkbox" id="php"/>
-                              <label for="php">PHP</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="htmlcss" class="skill" type="checkbox" id="htmlcss"/>
-                              <label for="htmlcss">HTML/CSS</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="js" class="skill" type="checkbox" id="js"/>
-                              <label for="js">Javascript</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="otherlang" class="skill" type="checkbox" id="otherlang"/>
-                              <label for="otherlang">Specified in message</label>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="technologies-checkboxes" class="col s12 m6">
-                        <p>Technologies</p>
-                        <div class="row">
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="sql" class="skill" type="checkbox" id="sql"/>
-                              <label for="sql">SQL</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="esri" class="skill" type="checkbox" id="esri"/>
-                              <label for="esri">Esri</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="ibm" class="skill" type="checkbox" id="ibm"/>
-                              <label for="ibm">IBM Bluemix</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="nodejs" class="skill" type="checkbox" id="nodejs"  />
-                              <label for="nodejs">Node.js</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="unity" class="skill" type="checkbox" id="unity"  />
-                              <label for="unity">Unity</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="phonegap" class="skill" type="checkbox" id="phonegap"  />
-                              <label for="phonegap">Phonegap</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="ios" class="skill" type="checkbox" id="ios"  />
-                              <label for="ios">iOS</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="android" class="skill" type="checkbox" id="android"  />
-                              <label for="android">Android</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="windows" class="skill" type="checkbox" id="windows"  />
-                              <label for="windows">Windows</label>
-                            </span>
-                          </div>
-                          <div class="col s12">
-                            <span class="cbox">
-                              <input name="othertech" class="skill" type="checkbox" id="othertech"  />
-                              <label for="othertech">Specified in message</label>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>                       
-                    <a class="waves-effect waves-light btn" onclick="getMentor();">Submit Mentor Request</a>                              
-                  </div>
+                    <label for="textarea1"></label>                      
+                  <a class="waves-effect waves-light btn" onclick="getMentor();">Submit Mentor Request</a>                              
                 </div>
               </form>
             </div>
