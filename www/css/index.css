@@ -227,7 +227,6 @@ textarea {
     width: 150px;
 }
 
-
 #tab-row {
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #444;
@@ -400,6 +399,6 @@ textarea {
 	border-top: 1px solid #ccc;
 }
 
-#tables table tr:nth-child(odd) {
+#tables tbody tr:nth-child(odd) {
 	background-color: #f9f9f9;
 }
