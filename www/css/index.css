@@ -344,28 +344,23 @@ textarea {
 .button-alt-text {
 	padding-top: 3px;
 	font-size: 0.5em;
-	font-family: Roboto;
 }
 
 @media (max-width: 330px) {
 	.button-alt-text {
 		font-size: 0.46em;
-		font-family: Roboto;
 	}
 }
 
 @media (max-width: 310px) {
 	.button-alt-text {
 		font-size: 0.43em;
-		font-family: Roboto;
 	}
 	a[href="#schedule"] i .button-alt-text {
 		visibility: hidden;
 		position: relative;
-		font-family: Roboto;
 	}
 	a[href="#schedule"] i .button-alt-text:after {
-		font-family: Roboto;
 		visibility: visible;
 		position: absolute;
 		top: 3px;

@@ -16,23 +16,23 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var wsuri = "ws://lmc.redspin.net:9000";
-var intro = null;
+ var wsuri = "ws://lmc.redspin.net:9000";
+ var intro = null;
 
-var MAP_ZOOM_MIN = 0.2;
-var MAP_ZOOM_MAX = 1;
-var MAP_ZOOM_DELTA = 0.4;
+ var MAP_ZOOM_MIN = 0.2;
+ var MAP_ZOOM_MAX = 1;
+ var MAP_ZOOM_DELTA = 0.4;
 
  var notificationCache = [{
-	"subject" : "",
-	"body" : "No notifications yet :D"
+   "subject" : "",
+   "body" : "No notifications yet :D"
  }];
 
-var cardHTML = "";
+ var cardHTML = "";
 
-var t=0;
+ var t=0;
 
-var currentView = "notifications";
+ var currentView = "notifications";
 
 // force rotation on ios
 window.shouldRotateToOrientation = function(deg) {
@@ -40,33 +40,33 @@ window.shouldRotateToOrientation = function(deg) {
 };
 
 var app = {
-    initialize: function() {
-        FastClick.attach(document.body);
+  initialize: function() {
+    FastClick.attach(document.body);
 
-        this.bind();
+    this.bind();
 
-				if (window['device'] === undefined)
-					this.deviceready();
+    if (window['device'] === undefined)
+     this.deviceready();
 
-				document.getElementById('menu-button')
-						.addEventListener('click', this.toggleMenu);
+   document.getElementById('menu-button')
+   .addEventListener('click', this.toggleMenu);
 
 				// needs to be recomputed for window resize
 				$("#map").css("top", $(".navbar-fixed").height()+"px");
 
         $("body").on('click', function(ev) {
-					if ($("#menu").hasClass("menu-open")) {
-						app.toggleMenu(ev);
-					}
-				});
+         if ($("#menu").hasClass("menu-open")) {
+          app.toggleMenu(ev);
+        }
+      });
 
         document.getElementById("map-controls-zoom-in")
-        		.addEventListener('click', function() {
+        .addEventListener('click', function() {
         	var s = Math.min(this.zoomer.scale+MAP_ZOOM_DELTA, MAP_ZOOM_MAX);
         	this.zoomer.zoom(s);
         }.bind(this));
         document.getElementById("map-controls-zoom-out")
-        		.addEventListener('click', function() {
+        .addEventListener('click', function() {
         	var s = Math.max(this.zoomer.scale-MAP_ZOOM_DELTA, MAP_ZOOM_MIN);
         	this.zoomer.zoom(s);
         }.bind(this));
@@ -114,36 +114,36 @@ var app = {
 				});
 
 				var maps = [
-					'sitterson0',
-					'phillips2',
-					'phillips3',
-					'carroll0',
-					'carroll1',
-					'chapman',
-					'outside'
-				];
-				$("#map-list-select").on("change", function() {
-					var map = maps[this.selectedIndex];
-					$("#map-view > img").attr("src", "img/" + map + ".png");
-				});
+       'sitterson0',
+       'phillips2',
+       'phillips3',
+       'carroll0',
+       'carroll1',
+       'chapman',
+       'outside'
+       ];
+       $("#map-list-select").on("change", function() {
+         var map = maps[this.selectedIndex];
+         $("#map-view > img").attr("src", "img/" + map + ".png");
+       });
 
-				$("#map-view > img").on("load", resetMap);
-    },
+       $("#map-view > img").on("load", resetMap);
+     },
 
-    toggleMenu: function(ev) {
-    		if (ev) {
-					ev.preventDefault();
-					ev.stopPropagation();
-				}
-        $("#menu").removeClass("transition");
-        $("#menu").addClass("transition").toggleClass("menu-close").toggleClass("menu-open");
-    },
+     toggleMenu: function(ev) {
+      if (ev) {
+       ev.preventDefault();
+       ev.stopPropagation();
+     }
+     $("#menu").removeClass("transition");
+     $("#menu").addClass("transition").toggleClass("menu-close").toggleClass("menu-open");
+   },
 
-	onResume: function() {
-		updateNotifications();
-	},
+   onResume: function() {
+    updateNotifications();
+  },
 
-    deviceready: function() {
+  deviceready: function() {
 				// set number of alerts to zero
 				if (localStorage.unreadAlerts == undefined)
 					localStorage.unreadAlerts = "0";
@@ -168,123 +168,123 @@ var app = {
 
         // This is an event handler function, which means the scope is the event.
         // So, we must explicitly called `app.report()` instead of `this.report()`.
-		window.push = PushNotification.init({
-            "android": {
-                "senderID": "824858956988"
-            },
-            "ios": {
-            	"alert": "true",
-            	"badge": "true",
-            	"sound": "true"
-						},
-            "windows": {}
-        });
+        window.push = PushNotification.init({
+          "android": {
+            "senderID": "824858956988"
+          },
+          "ios": {
+           "alert": "true",
+           "badge": "true",
+           "sound": "true"
+         },
+         "windows": {}
+       });
 
         push.on('registration', function(data) {
-            console.log("register", data.registrationId);
+          console.log("register", data.registrationId);
 			//data.registrationId
 			$.get('http://tv.hacknc.com/reg?id=' + data.registrationId + "&platform=" + device.platform, function(stuff) {
 			});
-        });
+    });
 
         push.on('notification', function(data) {
         	console.log("notification event", data);
         	var id = data.additionalData.id;
         	console.log('172 ', localStorage);
         	if (parseInt(localStorage.latestSeenAlert) == id + 1) {
-						JSON.parse(localStorage.alertCache).push({
-							message: data.message,
-							subject: data.title,
-							id: id
-						});
-        	}
-        	addUnreadAlerts();
-					updateNotifications();
+            JSON.parse(localStorage.alertCache).push({
+             message: data.message,
+             subject: data.title,
+             id: id
+           });
+          }
+          addUnreadAlerts();
+          updateNotifications();
         });
 
         push.on('error', function(e) {
-					console.log("push error", e);
-        });
-		},
+         console.log("push error", e);
+       });
+      },
 
-	bind: function() {
+      bind: function() {
         document.addEventListener('deviceready', this.deviceready, true);
-		document.addEventListener("resume", this.onResume, false);
+        document.addEventListener("resume", this.onResume, false);
 
-    },
+      },
 
-};
+    };
 
-function resetMap() {
-	if (app.zoomer) {
-		app.zoomer.destroy();
-		app.zoomer = null;
-	}
-	var $img = $("#map-view > img");
-	var minMapScale = Math.min(($("body").width()-10)/$img.width(), MAP_ZOOM_MAX);
-	app.zoomer = new IScroll("#map-view", {
-		zoom: true,
-		scrollbars: true,
-		scrollX: true,
-		scrollY: true,
-		freeScroll: true,
-		mouseWheel: true,
-		wheelAction: 'zoom',
-		zoomMin: minMapScale,
-		zoomMax: MAP_ZOOM_MAX
-	});
-	app.zoomer.zoom(minMapScale, undefined, undefined, 0);
-}
+    function resetMap() {
+     if (app.zoomer) {
+      app.zoomer.destroy();
+      app.zoomer = null;
+    }
+    var $img = $("#map-view > img");
+    var minMapScale = Math.min(($("body").width()-10)/$img.width(), MAP_ZOOM_MAX);
+    app.zoomer = new IScroll("#map-view", {
+      zoom: true,
+      scrollbars: true,
+      scrollX: true,
+      scrollY: true,
+      freeScroll: true,
+      mouseWheel: true,
+      wheelAction: 'zoom',
+      zoomMin: minMapScale,
+      zoomMax: MAP_ZOOM_MAX
+    });
+    app.zoomer.zoom(minMapScale, undefined, undefined, 0);
+  }
 
-function setView(name) {
+  function setView(name) {
     var activecolor = "#AAAAAA";
 
     views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
     console.log("view set " + name);
-	if (name == "notifications") {
-		updateNotifications();
-		window.addEventListener('scroll', windowScrollUnreadAlerts);
-		windowScrollUnreadAlerts();
-	}
-	else {
-		window.removeEventListener('scroll', windowScrollUnreadAlerts);
-	}
+    if (name == "notifications") {
+      updateNotifications();
+      window.addEventListener('scroll', windowScrollUnreadAlerts);
+      windowScrollUnreadAlerts();
+    }
+    else {
+      window.removeEventListener('scroll', windowScrollUnreadAlerts);
+    }
 
     $("#" + name ).show();
     $("." + name ).eq(0).css("fill" , activecolor);
     hideOthers(views, name);
     currentView = name;
 
-		if (name == "map") {
-			resetMap();
-		}
-		else {
-			if (app.zoomer) {
-				app.zoomer.destroy();
-				app.zoomer = null;
-			}
-		}
+    if (name == "map") {
+     resetMap();
+   }
+   else {
+     if (app.zoomer) {
+      app.zoomer.destroy();
+      app.zoomer = null;
+    }
+  }
 
 		// close menu when switching windows
     if ($("#menu").hasClass("menu-open")) {
     	app.toggleMenu();
     }
-}
+  }
 
-function hideOthers(views, name){
+  function hideOthers(views, name){
     var passivecolor = "#212121";
 
     delete views[views.indexOf(name)];
     for (i = 0; i< views.length; i++){
-        $("#" + views[i]).hide();
-        $("." + views[i]).each( function () {
-            $(this).css("fill" , passivecolor);
-            $(this).css("color", passivecolor);
-        });
+      $("#" + views[i]).hide();
+      $("." + views[i]).each( function () {
+        $(this).css("fill" , passivecolor);
+        $(this).css("color", passivecolor);
+      });
     }
-}
+  }
 
-function scheduleLoad(){
+  function scheduleLoad(){
     //alert("Load");
     //get JSON
     var url = "http://hacknc.com/schedule/json/student.json";
@@ -292,139 +292,139 @@ function scheduleLoad(){
     var scheduleJson;
 
     var setSchedule = function(data) {
-					var fritable = "";
-					var sattable = "";
-					var sntable = "";
+     var fritable = "";
+     var sattable = "";
+     var sntable = "";
 
-				for (var i =0 ; i<data.events.length ; i++){
-            thisEvent = data.events[i];
+     for (var i =0 ; i<data.events.length ; i++){
+      thisEvent = data.events[i];
             //console.log(thisEvent);
             var elem = "<tr><td class='schedule-first'>" + thisEvent.starttime + (thisEvent.endtime ? " - " + thisEvent.endtime : " " ) +  "</td><td>" + thisEvent.title + "</td></tr>";
 
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
                 fritable += elem;
-            } else if (thisEvent.day.toLowerCase() == "saturday"){
-            		sattable += elem;
-            } else {
-            		sntable += elem;
+              } else if (thisEvent.day.toLowerCase() == "saturday"){
+                sattable += elem;
+              } else {
+                sntable += elem;
+              }
             }
+            $("#fritable > tbody").html(fritable);
+            $("#sattable > tbody").html(sattable);
+            $("#sntable > tbody").html(sntable);
+          };
+
+          if (localStorage.schedule) {
+           setSchedule(JSON.parse(localStorage.schedule));
+         }
+
+         $.getJSON(url , function(data) {
+          scheduleJson = data;
+          localStorage.schedule = JSON.stringify(data);
+          setSchedule(data);
+        });
+       }
+
+       function updateNotifications() {
+
+        var cardHTML = '';
+        var cache = JSON.parse(localStorage.alertCache);
+        for (var i = 0; i < cache.length; i++) {
+          cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + cache[i].subject + "</span><div>" + cache[i].message + "</div></div></div>" + cardHTML;
         }
-        $("#fritable > tbody").html(fritable);
-        $("#sattable > tbody").html(sattable);
-        $("#sntable > tbody").html(sntable);
-    };
+        $("#notifications-internal").html(cardHTML);
 
-    if (localStorage.schedule) {
-    	setSchedule(JSON.parse(localStorage.schedule));
-    }
+        $.getJSON("http://tv.hacknc.com/archive" , function(data) {
+          var maxid = -1;
+          var newAlertCache = [];
+          console.log('notification data', data);
+          cardHTML="";
+          for (var i = 0; i < data.length; i++) {
+           maxid = Math.max(maxid, parseInt(data[i].id));
+           newAlertCache.push({
+             message: data[i].message,
+             subject: data[i].subject,
+             id: parseInt(data[i].id)
+           });
 
-    $.getJSON(url , function(data) {
-        scheduleJson = data;
-        localStorage.schedule = JSON.stringify(data);
-        setSchedule(data);
-    });
-}
-
-function updateNotifications() {
-
-  var cardHTML = '';
-  var cache = JSON.parse(localStorage.alertCache);
-	for (var i = 0; i < cache.length; i++) {
-		cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + cache[i].subject + "</span><div>" + cache[i].message + "</div></div></div>" + cardHTML;
-	}
-	$("#notifications-internal").html(cardHTML);
-
-	$.getJSON("http://tv.hacknc.com/archive" , function(data) {
-		var maxid = -1;
-		var newAlertCache = [];
-		console.log('notification data', data);
-		 cardHTML="";
-		 for (var i = 0; i < data.length; i++) {
-		 		maxid = Math.max(maxid, parseInt(data[i].id));
-				newAlertCache.push({
-					message: data[i].message,
-					subject: data[i].subject,
-					id: parseInt(data[i].id)
-				});
-
-				cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><div>" + data[i].message + "</div></div></div>" + cardHTML;
-			}
-			$("#notifications-internal").html(cardHTML);
-			localStorage.latestSeenAlert = maxid.toString();
-			localStorage.alertCache = JSON.stringify(newAlertCache);
-	 });
-}
-function getMentor(){
-    intro = {};
-    intro.type = "help";
-    intro.uid = getUserID();
-    intro.name = $("#mreq_name").val();
-    intro.issue = $("#mreq_issue").val();
-    intro.email = $("#mreq_email").val();
-    intro.skills = [];
-    $('#checkboxes input:checked').each(function () {
-        intro.skills.push($(this).attr('name'));
-    });
-    initWS();
+           cardHTML = "<div class=card> <div class='card-content black-text'><span class='card-title black-text'>" + data[i].subject + "</span><div>" + data[i].message + "</div></div></div>" + cardHTML;
+         }
+         $("#notifications-internal").html(cardHTML);
+         localStorage.latestSeenAlert = maxid.toString();
+         localStorage.alertCache = JSON.stringify(newAlertCache);
+       });
+      }
+      function getMentor(){
+        intro = {};
+        intro.type = "help";
+        intro.uid = getUserID();
+        intro.name = $("#mreq_name").val();
+        intro.issue = $("#mreq_issue").val();
+        intro.email = $("#mreq_email").val();
+        intro.skills = [];
+        $('#checkboxes input:checked').each(function () {
+          intro.skills.push($(this).attr('name'));
+        });
+        initWS();
     //Fake it for now
     requestUiUpdate(false);
-}
+  }
 
-function cancelMentor() {
+  function cancelMentor() {
     //send a server message saying we want to cancel the request
     var cancel = {
-        "type" : "remove",
-        "uid" : getUserID()
+      "type" : "remove",
+      "uid" : getUserID()
     };
     ws.send(JSON.stringify(cancel));
     requestUiUpdate(true);
-}
+  }
 
-function requestUiUpdate(showForm){
+  function requestUiUpdate(showForm){
     //Remove the request form
     if(!showForm){
-        $("#request-form-card").hide();
-        $("#submitted").show();
+      $("#request-form-card").hide();
+      $("#submitted").show();
     } else {
-        $("#request-form-card").show();
-        $("#submitted").hide();
+      $("#request-form-card").show();
+      $("#submitted").hide();
     }
 
 
-}
+  }
 
-function getUserID(){
+  function getUserID(){
     // this should always return the same value for the same device client.
     // Cookies for web.
     // Storing to memory if
     if (localStorage.muid){
         //It's already set.  Leave it alone
         return localStorage.muid;
-    } else{
+      } else{
         localStorage.muid = createGuid();
         return localStorage.muid;
+      }
     }
-}
-function createGuid(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
+    function createGuid(){
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+      });
     }
-function initWS(){
+    function initWS(){
       ws = new WebSocket(wsuri);
       ws.onopen = function(evt){onOpen(evt);};
       ws.onmessage = function(evt){onMessage(evt);};
     }
 
-function onMessage(event){
-    var msg = JSON.parse(event.data);
-    console.log(msg);
-    if(msg.type == "response"){
+    function onMessage(event){
+      var msg = JSON.parse(event.data);
+      console.log(msg);
+      if(msg.type == "response"){
         $("#submitted-waiting").show();
         $("#submitted-response").text(msg.body);
-    } else if (msg.type == "respond"){
+      } else if (msg.type == "respond"){
         var name = "<p>Name: "+ msg.body.name + "</p>";
         var location = "<p>Location "+ msg.body.location + " </p>";
         var message = "<p>Message: " + msg.body.message + "</p>";
@@ -436,35 +436,35 @@ function onMessage(event){
         $("#submitted-response-2").append(message);
         $("#submitted-response-2").append(email);
         $("#submitted-waiting").hide();
+      }
     }
-}
-function newRequest(){
-    $("#submitted").hide();
-    $("#submitted-mentor-response").hide();
-    $("#request-form-card").show();
-}
+    function newRequest(){
+      $("#submitted").hide();
+      $("#submitted-mentor-response").hide();
+      $("#request-form-card").show();
+    }
 
-function onOpen(event){
+    function onOpen(event){
       console.log(intro);
       ws.send(JSON.stringify(intro));
     }
 
-function addUnreadAlerts() {
-	if (localStorage.unreadAlerts) {
-		if (currentView != 'notifications' || window.scrollY > 0) {
-			localStorage.unreadAlerts = parseInt(localStorage.unreadAlerts) + 1;
-			$("#notification-count").text(localStorage.unreadAlerts);
-			$("#notification-count").show();
-		}
-	}
-}
+    function addUnreadAlerts() {
+     if (localStorage.unreadAlerts) {
+      if (currentView != 'notifications' || window.scrollY > 0) {
+       localStorage.unreadAlerts = parseInt(localStorage.unreadAlerts) + 1;
+       $("#notification-count").text(localStorage.unreadAlerts);
+       $("#notification-count").show();
+     }
+   }
+ }
 
-function resetUnreadAlerts() {
-	localStorage.unreadAlerts = "0";
-	$("#notification-count").hide();
-}
+ function resetUnreadAlerts() {
+   localStorage.unreadAlerts = "0";
+   $("#notification-count").hide();
+ }
 
-function windowScrollUnreadAlerts() {
-	if (window.scrollY == 0)
-		resetUnreadAlerts();
+ function windowScrollUnreadAlerts() {
+   if (window.scrollY == 0)
+    resetUnreadAlerts();
 }
