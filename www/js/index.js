@@ -181,16 +181,13 @@ var app = {
        });
 
         push.on('registration', function(data) {
-          console.log("register", data.registrationId);
 			//data.registrationId
 			$.get('http://tv.hacknc.com/reg?id=' + data.registrationId + "&platform=" + device.platform, function(stuff) {
 			});
     });
 
         push.on('notification', function(data) {
-        	console.log("notification event", data);
         	var id = data.additionalData.id;
-        	console.log('172 ', localStorage);
         	if (parseInt(localStorage.latestSeenAlert) == id + 1) {
             JSON.parse(localStorage.alertCache).push({
              message: data.message,
@@ -240,7 +237,6 @@ var app = {
     var activecolor = "#AAAAAA";
 
     views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
-    console.log("view set " + name);
     if (name == "notifications") {
       updateNotifications();
       window.addEventListener('scroll', windowScrollUnreadAlerts);
@@ -298,11 +294,9 @@ var app = {
 
      for (var i =0 ; i<data.events.length ; i++){
       thisEvent = data.events[i];
-            //console.log(thisEvent);
             var elem = "<tr><td class='schedule-first'>" + thisEvent.starttime + (thisEvent.endtime ? "<br>" + thisEvent.endtime : " " ) +  "</td><td>" + thisEvent.room + "</td><td>" + thisEvent.title + "</td></tr>";
 
             if (data.events[i].day.toLowerCase() == "friday"){
-                //console.log("friday");
                 fritable += elem;
               } else if (thisEvent.day.toLowerCase() == "saturday"){
                 sattable += elem;
@@ -338,7 +332,6 @@ var app = {
         $.getJSON("http://tv.hacknc.com/archive" , function(data) {
           var maxid = -1;
           var newAlertCache = [];
-          console.log('notification data', data);
           cardHTML="";
           for (var i = 0; i < data.length; i++) {
            maxid = Math.max(maxid, parseInt(data[i].id));
@@ -420,7 +413,6 @@ var app = {
 
     function onMessage(event){
       var msg = JSON.parse(event.data);
-      console.log(msg);
       if(msg.type == "response"){
         $("#submitted-waiting").show();
         $("#submitted-response").text(msg.body);
@@ -445,7 +437,6 @@ var app = {
     }
 
     function onOpen(event){
-      console.log(intro);
       ws.send(JSON.stringify(intro));
     }
 
