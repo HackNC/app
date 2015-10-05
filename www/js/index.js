@@ -94,16 +94,10 @@ var app = {
 					});
 				});
 
-				$("#mentors input[type='text']").on('blur', function(ev) {
+				$("#mentors input").on('blur', function(ev) {
 					$("#footer").show();
 				});
-				$("#mentors input[type='text']").on('focus', function(ev) {
-					$("#footer").hide();
-				});
-				$("#mentors input[type='email']").on('blur', function(ev) {
-					$("#footer").show();
-				});
-				$("#mentors input[type='email']").on('focus', function(ev) {
+				$("#mentors input").on('focus', function(ev) {
 					$("#footer").hide();
 				});
 				$("#mentors textarea").on('blur', function(ev) {
