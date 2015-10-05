@@ -443,7 +443,7 @@ var app = {
     function addUnreadAlerts() {
      if (localStorage.unreadAlerts) {
       if (currentView != 'notifications' || window.scrollY > 0) {
-       localStorage.unreadAlerts = parseInt(localStorage.unreadAlerts) + 1;
+       localStorage.unreadAlerts = "" + (parseInt(localStorage.unreadAlerts) + 1);
        $("#notification-count").text(localStorage.unreadAlerts);
        $("#notification-count").show();
      }
