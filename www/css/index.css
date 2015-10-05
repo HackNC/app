@@ -38,7 +38,7 @@
     user-select: none;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"] {
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
