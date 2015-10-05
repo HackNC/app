@@ -47,7 +47,7 @@
     <!--gap:plugin name="org.apache.cordova.vibration" /-->
 
     <!--fix the ios statusbar-->
-    <gap:plugin name="cordova-plugin-statusbar" source="npm" />
+    <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" source="npm" />
     <preference name="StatusBarOverlaysWebView" value="false"/>
     <preference name="StatusBarBackgroundColor" value="#463e47" />
     <preference name="StatusBarStyle" value="lightcontent" />    
