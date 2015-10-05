@@ -16,29 +16,22 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- var wsuri = "ws://lmc.redspin.net:9000";
- var intro = null;
-
- var MAP_ZOOM_MIN = 0.2;
- var MAP_ZOOM_MAX = 1;
- var MAP_ZOOM_DELTA = 0.4;
-
- var notificationCache = [{
-   "subject" : "",
-   "body" : "No notifications yet :D"
- }];
-
- var cardHTML = "";
-
- var t=0;
-
- var currentView = "notifications";
-
+var wsuri = "ws://lmc.redspin.net:9000";
+var intro = null;
+var MAP_ZOOM_MIN = 0.2;
+var MAP_ZOOM_MAX = 1;
+var MAP_ZOOM_DELTA = 0.4;
+var notificationCache = [{
+  "subject" : "",
+  "body" : "No notifications yet :D"
+}];
+var cardHTML = "";
+var t=0;
+var currentView = "notifications";
 // force rotation on ios
 window.shouldRotateToOrientation = function(deg) {
 	return true;
 };
-
 var app = {
   initialize: function() {
     FastClick.attach(document.body);
@@ -195,7 +188,7 @@ var app = {
   },
 };
 
-function resetMap() {
+var resetMap = function() {
   if (app.zoomer) {
     app.zoomer.destroy();
     app.zoomer = null;
@@ -214,9 +207,9 @@ function resetMap() {
     zoomMax: MAP_ZOOM_MAX
   });
   app.zoomer.zoom(minMapScale, undefined, undefined, 0);
-}
+};
 
-function setView(name) {
+var setView = function(name) {
   var activecolor = "#AAAAAA";
 
   views = ['notifications', 'schedule', 'mentors', "info", "sponsors", "map"];
@@ -247,9 +240,9 @@ function setView(name) {
   if ($("#menu").hasClass("menu-open")) {
   	app.toggleMenu();
   }
-}
+};
 
-function hideOthers(views, name) {
+var hideOthers = function(views, name) {
   var passivecolor = "#212121";
   delete views[views.indexOf(name)];
   for (i = 0; i< views.length; i++){
@@ -259,9 +252,9 @@ function hideOthers(views, name) {
       $(this).css("color", passivecolor);
     });
   }
-}
+};
 
-function scheduleLoad() {
+var scheduleLoad = function() {
   var url = "http://hacknc.com/schedule/json/student.json";
   var scheduleJson;
   var setSchedule = function(data) {
@@ -293,9 +286,9 @@ function scheduleLoad() {
       localStorage.schedule = JSON.stringify(data);
       setSchedule(data);
   });
-}
+};
 
-function updateNotifications() {
+var updateNotifications = function() {
   var cardHTML = '';
   var cache = JSON.parse(localStorage.alertCache);
   for (var i = 0; i < cache.length; i++) {
@@ -319,9 +312,9 @@ function updateNotifications() {
     localStorage.latestSeenAlert = maxid.toString();
     localStorage.alertCache = JSON.stringify(newAlertCache);
   });
-}
+};
 
-function getMentor(){
+var getMentor = function() {
   intro = {};
   intro.type = "help";
   intro.uid = getUserID();
@@ -334,9 +327,9 @@ function getMentor(){
   });
   initWS();
   requestUiUpdate(false);
-}
+};
 
-function cancelMentor() {
+var cancelMentor = function() {
   //send a server message saying we want to cancel the request
   var cancel = {
     "type" : "remove",
@@ -344,9 +337,9 @@ function cancelMentor() {
   };
   ws.send(JSON.stringify(cancel));
   requestUiUpdate(true);
-}
+};
 
-function requestUiUpdate(showForm){
+var requestUiUpdate = function(showForm){
   //Remove the request form
   if(!showForm){
     $("#request-form-card").hide();
@@ -355,35 +348,35 @@ function requestUiUpdate(showForm){
     $("#request-form-card").show();
     $("#submitted").hide();
   }
-}
+};
 
-function getUserID(){
+var getUserID = function() {
   // this should always return the same value for the same device client.
   // Cookies for web.
   // Storing to memory if
-  if (localStorage.muid){
-      //It's already set.  Leave it alone
-      return localStorage.muid;
-    } else{
-      localStorage.muid = createGuid();
-      return localStorage.muid;
-    }
+  if (localStorage.muid) {
+    //It's already set.  Leave it alone
+    return localStorage.muid;
+  } else{
+    localStorage.muid = createGuid();
+    return localStorage.muid;
   }
+};
 
-function createGuid(){
+var createGuid = function() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
     return v.toString(16);
   });
-}
+};
 
-function initWS(){
+var initWS = function() {
   ws = new WebSocket(wsuri);
   ws.onopen = function(evt){onOpen(evt);};
   ws.onmessage = function(evt){onMessage(evt);};
-}
+};
 
-function onMessage(event){
+var onMessage = function(event){
   var msg = JSON.parse(event.data);
   if(msg.type == "response"){
     $("#submitted-waiting").show();
@@ -401,19 +394,19 @@ function onMessage(event){
     $("#submitted-response-2").append(email);
     $("#submitted-waiting").hide();
   }
-}
+};
 
-function newRequest(){
+var newRequest = function() {
   $("#submitted").hide();
   $("#submitted-mentor-response").hide();
   $("#request-form-card").show();
-}
+};
 
-function onOpen(event){
+var onOpen = function(event){
   ws.send(JSON.stringify(intro));
-}
+};
 
-function addUnreadAlerts() {
+var addUnreadAlerts = function() {
   if (localStorage.unreadAlerts) {
     if (currentView != 'notifications' || window.scrollY > 0) {
       localStorage.unreadAlerts = "" + (parseInt(localStorage.unreadAlerts) + 1);
@@ -421,14 +414,14 @@ function addUnreadAlerts() {
       $("#notification-count").show();
     }
   }
-}
+};
 
-function resetUnreadAlerts() {
+var resetUnreadAlerts = function() {
   localStorage.unreadAlerts = "0";
   $("#notification-count").hide();
-}
+};
 
- function windowScrollUnreadAlerts() {
+var windowScrollUnreadAlerts = function() {
   if (window.scrollY == 0)
     resetUnreadAlerts();
-}
+};
