@@ -181,6 +181,8 @@ var app = {
     push.on('error', function(e) {
       console.log("push error", e);
     });
+
+    StatusBar.overlaysWebView(true);
   },
   bind: function() {
     document.addEventListener('deviceready', this.deviceready, true);

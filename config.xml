@@ -48,6 +48,9 @@
 
     <!--fix the ios statusbar-->
     <gap:plugin name="cordova-plugin-statusbar" source="npm" />
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>    
     <preference name="StatusBarOverlaysWebView" value="false"/>
     <preference name="StatusBarBackgroundColor" value="#463e47" />
     <preference name="StatusBarStyle" value="lightcontent" />    
