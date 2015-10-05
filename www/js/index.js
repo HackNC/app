@@ -182,7 +182,7 @@ var app = {
 
         push.on('registration', function(data) {
 			//data.registrationId
-			$.get('http://tv.hacknc.com/reg?id=' + data.registrationId + "&platform=" + device.platform, function(stuff) {
+			$.get('http://tv.hacknc.com/reg?id=' + data.registrationId + "&platform=" + device.platform + "&uuid=" + device.uuid, function(stuff) {
 			});
     });
 
