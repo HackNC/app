@@ -299,7 +299,7 @@ var app = {
      for (var i =0 ; i<data.events.length ; i++){
       thisEvent = data.events[i];
             //console.log(thisEvent);
-            var elem = "<tr><td class='schedule-first'>" + thisEvent.starttime + (thisEvent.endtime ? " - " + thisEvent.endtime : " " ) +  "</td><td>" + thisEvent.title + "</td></tr>";
+            var elem = "<tr><td class='schedule-first'>" + thisEvent.starttime + (thisEvent.endtime ? "<br>" + thisEvent.endtime : " " ) +  "</td><td>" + thisEvent.room + "</td><td>" + thisEvent.title + "</td></tr>";
 
             if (data.events[i].day.toLowerCase() == "friday"){
                 //console.log("friday");
