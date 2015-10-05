@@ -94,16 +94,16 @@ var app = {
 					});
 				});
 
-				$("#mentors input").on('blur', function(ev) {
+				$("#mreq_email, #mreq_name").on('blur', function(ev) {
 					$("#footer").show();
 				});
-				$("#mentors input").on('focus', function(ev) {
+				$("#mreq_email, #mreq_name").on('focus', function(ev) {
 					$("#footer").hide();
 				});
-				$("#mentors textarea").on('blur', function(ev) {
+				$("#mreq_issue").on('blur', function(ev) {
 					$("#footer").show();
 				});
-				$("#mentors textarea").on('focus', function(ev) {
+				$("#mreq_issue").on('focus', function(ev) {
 					$("#footer").hide();
 				});
 				document.addEventListener('hidekeyboard', function(ev) {
@@ -114,18 +114,18 @@ var app = {
 				});
 
 				var maps = [
-       'sitterson0',
-       'phillips2',
-       'phillips3',
-       'carroll0',
-       'carroll1',
-       'chapman',
-       'outside'
-       ];
-       $("#map-list-select").on("change", function() {
-         var map = maps[this.selectedIndex];
-         $("#map-view > img").attr("src", "img/" + map + ".png");
-       });
+          'sitterson0',
+          'phillips2',
+          'phillips3',
+          'carroll0',
+          'carroll1',
+          'chapman',
+          'outside'
+        ];
+        $("#map-list-select").on("change", function() {
+          var map = maps[this.selectedIndex];
+          $("#map-view > img").attr("src", "img/" + map + ".png");
+        });
 
        $("#map-view > img").on("load", resetMap);
      },
