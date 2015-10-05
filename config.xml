@@ -91,8 +91,6 @@
     <!--ios launch images-->
     <platform name="ios">
 
-        <splash src="res/screen/ios/320x480-landscape.png" width="480" height="320" />
-        <splash src="res/screen/ios/320x480-portrait.png" width="320" height="480" />
         <splash src="res/screen/ios/640x960-landscape-@2x.png" width="960" height="640" />
         <splash src="res/screen/ios/640x960-portrait-@2x.png" width="640" height="960" />
         <splash src="res/screen/ios/640x1136-landscape-@2x.png" width="1136" height="640" />
