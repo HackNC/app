@@ -151,7 +151,7 @@ var app = {
 		////////////////////////////////////////
 		if (window['device'] == undefined) return;
     // This is an event handler function, which means the scope is the event.
-    // So, we must explicitly call `app.report()` instead of `this.report()`.
+    // So, we must explicitly called `app.report()` instead of `this.report()`.
     window.push = PushNotification.init({
       "android": {
         "senderID": "824858956988"
@@ -162,6 +162,11 @@ var app = {
         "sound": "true"
       },
       "windows": {}
+    });
+    push.on('registration', function(data) {
+	  //data.registrationId
+	  $.get('http://tv.hacknc.com/reg?id=' + data.registrationId + "&platform=" + device.platform + "&uuid=" + device.uuid,
+        function(stuff) {});
     });
     push.on('registration', function(data) {
   	  //data.registrationId
