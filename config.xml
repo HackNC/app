@@ -46,6 +46,12 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <!--gap:plugin name="org.apache.cordova.vibration" /-->
 
+    <!--fix the ios statusbar-->
+    <gap:plugin name="com.phonegap.plugin.statusbar" />
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <preference name="StatusBarBackgroundColor" value="#463e47" />
+    <preference name="StatusBarStyle" value="lightcontent" />     
+
     <icon src="icon.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:density="mdpi" gap:platform="android" src="res/icon/android/icon-48-mdpi.png" />
