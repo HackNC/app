@@ -36,8 +36,15 @@ var app = {
   initialize: function() {
     FastClick.attach(document.body);
     this.bind();
-    if (window['device'] === undefined)
+    if (window['device'] === undefined) {
       this.deviceready();
+
+      app.socket = io.connect('tv.hacknc.com');
+      app.socket.on('message', function(msg) {
+      	updateNotifications();
+      });
+    }
+
     document.getElementById('menu-button')
         .addEventListener('click', this.toggleMenu);
 		// needs to be recomputed for window resize
